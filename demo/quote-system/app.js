@@ -7,17 +7,21 @@ const currencySettings = {
 const elements = {
   serviceName: document.getElementById("serviceName"),
   currency: document.getElementById("currency"),
+  unitType: document.getElementById("unitType"),
   quantity: document.getElementById("quantity"),
   rate: document.getElementById("rate"),
   setupFee: document.getElementById("setupFee"),
   discountRate: document.getElementById("discountRate"),
   taxRate: document.getElementById("taxRate"),
+  taxRateField: document.getElementById("taxRateField"),
   includeTax: document.getElementById("includeTax"),
   customFee: document.getElementById("customFee"),
   baseLabel: document.getElementById("baseLabel"),
   baseSubtotal: document.getElementById("baseSubtotal"),
   setupFeeValue: document.getElementById("setupFeeValue"),
   customFeeValue: document.getElementById("customFeeValue"),
+  quantityLabel: document.getElementById("quantityLabel"),
+  rateLabel: document.getElementById("rateLabel"),
   discountLabel: document.getElementById("discountLabel"),
   discountValue: document.getElementById("discountValue"),
   taxRow: document.getElementById("taxRow"),
@@ -64,6 +68,17 @@ const updateCurrencyDisplays = (formatter, symbol) => {
   });
 };
 
+const updateUnitLabels = (unitType) => {
+  const isHours = unitType === "hours";
+  const unitLabel = isHours ? "Hours" : "Units";
+  const rateLabel = isHours ? "Rate per hour" : "Rate per unit";
+
+  elements.quantityLabel.textContent = unitLabel;
+  elements.rateLabel.textContent = rateLabel;
+
+  return isHours ? "hours" : "units";
+};
+
 const buildExtras = () =>
   extraInputs
     .filter((input) => input.checked)
@@ -86,6 +101,8 @@ const updateBreakdown = () => {
   const includeTax = elements.includeTax.checked;
   const customFee = Math.max(0, sanitizeNumber(elements.customFee.value));
   const serviceName = elements.serviceName.value.trim() || "Service";
+  const unitType = elements.unitType.value;
+  const unitLabel = updateUnitLabels(unitType);
 
   const baseSubtotal = quantity * rate;
   const extras = buildExtras();
@@ -109,8 +126,10 @@ const updateBreakdown = () => {
   elements.taxLabel.textContent = `Tax (${Math.round(taxRate)}%)`;
   elements.taxValue.textContent = formatMoney(taxAmount);
   elements.taxRow.classList.toggle("is-hidden", !includeTax);
+  elements.taxRate.disabled = !includeTax;
+  elements.taxRateField.classList.toggle("is-disabled", !includeTax);
   elements.totalValue.textContent = formatMoney(total);
-  elements.summaryNote.textContent = `${serviceName} · Based on ${quantity} units at ${formatMoney(
+  elements.summaryNote.textContent = `${serviceName} · Based on ${quantity} ${unitLabel} at ${formatMoney(
     rate
   )} each.`;
 
@@ -144,6 +163,7 @@ const bindEvents = () => {
   const inputs = [
     elements.serviceName,
     elements.currency,
+    elements.unitType,
     elements.quantity,
     elements.rate,
     elements.setupFee,

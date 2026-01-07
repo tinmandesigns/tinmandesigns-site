@@ -48,12 +48,20 @@
               </label>
 
               <label class="field">
-                <span>Quantity / hours</span>
+                <span>Type</span>
+                <select id="unitType">
+                  <option value="units" selected>Units</option>
+                  <option value="hours">Hours</option>
+                </select>
+              </label>
+
+              <label class="field">
+                <span id="quantityLabel">Units</span>
                 <input type="number" id="quantity" min="1" step="1" value="12" />
               </label>
 
               <label class="field">
-                <span>Rate per unit</span>
+                <span id="rateLabel">Rate per unit</span>
                 <div class="input-prefix">
                   <span class="currency-symbol" data-currency-symbol>$</span>
                   <input type="number" id="rate" min="0" step="5" value="120" />
@@ -81,7 +89,7 @@
                 <input type="number" id="discountRate" min="0" max="100" step="1" value="0" />
               </label>
 
-              <label class="field">
+              <label class="field" id="taxRateField">
                 <span>Tax rate (%)</span>
                 <input type="number" id="taxRate" min="0" max="100" step="1" value="20" />
               </label>
