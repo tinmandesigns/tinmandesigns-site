@@ -94,6 +94,11 @@ img {
   color: var(--text);
 }
 
+.nav-links .nav-cta {
+  margin-top: 8px;
+  width: 100%;
+}
+
 .nav-toggle {
   display: inline-flex;
   flex-direction: column;
