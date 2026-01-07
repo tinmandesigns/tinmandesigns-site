@@ -24,6 +24,7 @@ const elements = {
   rateLabel: document.getElementById("rateLabel"),
   discountLabel: document.getElementById("discountLabel"),
   discountValue: document.getElementById("discountValue"),
+  discountRow: document.getElementById("discountRow"),
   taxRow: document.getElementById("taxRow"),
   taxLabel: document.getElementById("taxLabel"),
   taxValue: document.getElementById("taxValue"),
@@ -123,6 +124,7 @@ const updateBreakdown = () => {
   elements.customFeeValue.textContent = formatMoney(customFee);
   elements.discountLabel.textContent = `Discount (${Math.round(discountRate)}%)`;
   elements.discountValue.textContent = formatter.format(-discountAmount);
+  elements.discountRow.classList.toggle("is-hidden", discountRate <= 0);
   elements.taxLabel.textContent = `Tax (${Math.round(taxRate)}%)`;
   elements.taxValue.textContent = formatMoney(taxAmount);
   elements.taxRow.classList.toggle("is-hidden", !includeTax);
