@@ -139,7 +139,7 @@ const buildRelevantLineItems = ({
       label: `Tax (${Math.round(taxRate)}%)`,
       value: formatMoney(taxAmount),
       amount: taxAmount,
-      visible: includeTax && taxAmount > 0,
+      visible: includeTax,
     },
   };
 };
