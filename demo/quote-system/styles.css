@@ -78,10 +78,33 @@ body {
   color: var(--muted);
 }
 
+.form-sections {
+  display: grid;
+  gap: 24px;
+  margin: 24px 0;
+}
+
+.form-section {
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: #fbfcff;
+  padding: 20px;
+  display: grid;
+  gap: 16px;
+}
+
+.section-header h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.section-header p {
+  margin: 0;
+}
+
 .form-grid {
   display: grid;
   gap: 18px;
-  margin: 24px 0;
 }
 
 .field {
@@ -257,9 +280,7 @@ body {
 }
 
 .summary-card {
-  position: sticky;
-  top: 24px;
-  align-self: start;
+  position: static;
 }
 
 .breakdown {
@@ -341,19 +362,8 @@ body {
   display: none;
 }
 
-@media (min-width: 900px) {
-  .layout {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 360px);
-    align-items: start;
-  }
-
-  .form-grid {
+@media (min-width: 720px) {
+  .form-sections {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (max-width: 899px) {
-  .summary-card {
-    position: static;
   }
 }
