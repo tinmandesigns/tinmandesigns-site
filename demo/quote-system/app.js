@@ -31,6 +31,13 @@ const elements = {
   extrasBreakdown: document.getElementById("extrasBreakdown"),
   totalValue: document.getElementById("totalValue"),
   summaryNote: document.getElementById("summaryNote"),
+  clientName: document.getElementById("clientName"),
+  messageNote: document.getElementById("messageNote"),
+  quoteMessage: document.getElementById("quoteMessage"),
+  copyMessage: document.getElementById("copyMessage"),
+  copyStatus: document.getElementById("copyStatus"),
+  whatsAppShare: document.getElementById("whatsAppShare"),
+  downloadQuote: document.getElementById("downloadQuote"),
 };
 
 const extraInputs = Array.from(
@@ -88,6 +95,132 @@ const buildExtras = () =>
       amount: sanitizeNumber(input.dataset.amount),
     }));
 
+// Message template for client-ready quotes. Adjust wording here if needed.
+const buildQuoteMessage = ({
+  serviceName,
+  total,
+  discountAmount,
+  discountRate,
+  includeTax,
+  taxAmount,
+  taxRate,
+  unitLabel,
+  quantity,
+  rate,
+  formatter,
+}) => {
+  const clientName = elements.clientName.value.trim();
+  const messageNote = elements.messageNote.value.trim();
+  const greeting = clientName ? `Hi ${clientName},` : "Hello,";
+  const formattedTotal = formatter.format(total);
+  const formattedRate = formatter.format(rate);
+  const formattedDiscount = formatter.format(-discountAmount);
+  const formattedTax = formatter.format(taxAmount);
+  const description = serviceName
+    ? `Here’s your quote for ${serviceName.toLowerCase()}.`
+    : "Here’s your quote for the requested service.";
+  const lineItems = [];
+
+  if (discountRate > 0) {
+    lineItems.push(`• Discount (${Math.round(discountRate)}%): ${formattedDiscount}`);
+  }
+
+  if (includeTax) {
+    lineItems.push(`• Tax (${Math.round(taxRate)}%): ${formattedTax}`);
+  }
+
+  const lines = [
+    greeting,
+    "",
+    description,
+    `Estimate details: ${quantity} ${unitLabel} at ${formattedRate} each.`,
+    `Total estimate: ${formattedTotal}`,
+  ];
+
+  if (lineItems.length) {
+    lines.push("", ...lineItems);
+  }
+
+  if (messageNote) {
+    lines.push("", `Note: ${messageNote}`);
+  }
+
+  lines.push("", "If this looks good, reply and I’ll lock in the next steps.");
+
+  return lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
+};
+
+const updateMessageActions = (message) => {
+  elements.quoteMessage.value = message;
+  const encodedMessage = encodeURIComponent(message);
+  elements.whatsAppShare.href = `https://wa.me/?text=${encodedMessage}`;
+};
+
+const showCopyStatus = (text) => {
+  elements.copyStatus.textContent = text;
+  elements.copyStatus.classList.add("is-visible");
+  window.clearTimeout(showCopyStatus.timeout);
+  showCopyStatus.timeout = window.setTimeout(() => {
+    elements.copyStatus.classList.remove("is-visible");
+  }, 2000);
+};
+
+const handleCopyMessage = async () => {
+  const message = elements.quoteMessage.value;
+  if (!message) {
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(message);
+    showCopyStatus("Copied to clipboard");
+  } catch (error) {
+    const fallback = document.createElement("textarea");
+    fallback.value = message;
+    fallback.setAttribute("readonly", "");
+    fallback.style.position = "absolute";
+    fallback.style.left = "-9999px";
+    document.body.appendChild(fallback);
+    fallback.select();
+    document.execCommand("copy");
+    document.body.removeChild(fallback);
+    showCopyStatus("Copied to clipboard");
+  }
+};
+
+const handleDownloadQuote = () => {
+  const message = elements.quoteMessage.value.trim();
+  if (!message) {
+    return;
+  }
+
+  const printWindow = window.open("", "_blank");
+  if (!printWindow) {
+    return;
+  }
+
+  const safeMessage = message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  printWindow.document.write(`
+    <html>
+      <head>
+        <title>Quote</title>
+        <style>
+          body { font-family: "Inter", Arial, sans-serif; padding: 32px; color: #1d2433; }
+          h1 { font-size: 1.4rem; margin-bottom: 16px; }
+          pre { white-space: pre-wrap; font-size: 1rem; line-height: 1.6; }
+        </style>
+      </head>
+      <body>
+        <h1>Quote message</h1>
+        <pre>${safeMessage}</pre>
+      </body>
+    </html>
+  `);
+  printWindow.document.close();
+  printWindow.focus();
+  printWindow.print();
+};
+
 const updateBreakdown = () => {
   const currency = elements.currency.value;
   const formatter = getCurrencyFormatter(currency);
@@ -135,6 +268,21 @@ const updateBreakdown = () => {
     rate
   )} each.`;
 
+  const message = buildQuoteMessage({
+    serviceName,
+    total,
+    discountAmount,
+    discountRate,
+    includeTax,
+    taxAmount,
+    taxRate,
+    unitLabel,
+    quantity,
+    rate,
+    formatter,
+  });
+  updateMessageActions(message);
+
   elements.extrasBreakdown.innerHTML = "";
   const groupTitle = document.createElement("p");
   groupTitle.className = "group-title";
@@ -173,6 +321,8 @@ const bindEvents = () => {
     elements.taxRate,
     elements.includeTax,
     elements.customFee,
+    elements.clientName,
+    elements.messageNote,
     ...extraInputs,
   ];
 
@@ -180,6 +330,9 @@ const bindEvents = () => {
     input.addEventListener("input", updateBreakdown);
     input.addEventListener("change", updateBreakdown);
   });
+
+  elements.copyMessage.addEventListener("click", handleCopyMessage);
+  elements.downloadQuote.addEventListener("click", handleDownloadQuote);
 };
 
 // Initialize the interface with defaults.
