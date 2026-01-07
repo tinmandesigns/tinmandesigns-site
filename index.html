@@ -183,6 +183,11 @@
       const siteHeader = document.querySelector(".site-header");
 
       if (navToggle && navLinks && siteHeader) {
+        const closeNav = () => {
+          siteHeader.classList.remove("nav-open");
+          navToggle.setAttribute("aria-expanded", "false");
+        };
+
         navToggle.addEventListener("click", () => {
           const isOpen = siteHeader.classList.toggle("nav-open");
           navToggle.setAttribute("aria-expanded", isOpen);
@@ -190,8 +195,17 @@
 
         navLinks.addEventListener("click", (event) => {
           if (event.target instanceof HTMLAnchorElement) {
-            siteHeader.classList.remove("nav-open");
-            navToggle.setAttribute("aria-expanded", "false");
+            closeNav();
+          }
+        });
+
+        document.addEventListener("pointerdown", (event) => {
+          if (!siteHeader.classList.contains("nav-open")) {
+            return;
+          }
+
+          if (event.target instanceof Node && !siteHeader.contains(event.target)) {
+            closeNav();
           }
         });
       }
