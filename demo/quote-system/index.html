@@ -33,6 +33,15 @@
           </label>
 
           <label class="field">
+            <span>Currency</span>
+            <select id="currency">
+              <option value="GBP">GBP (£)</option>
+              <option value="USD" selected>USD ($)</option>
+              <option value="EUR">EUR (€)</option>
+            </select>
+          </label>
+
+          <label class="field">
             <span>Quantity / hours</span>
             <input type="number" id="quantity" min="1" step="1" value="12" />
           </label>
@@ -40,7 +49,7 @@
           <label class="field">
             <span>Rate per unit</span>
             <div class="input-prefix">
-              <span>$</span>
+              <span class="currency-symbol" data-currency-symbol>$</span>
               <input type="number" id="rate" min="0" step="5" value="120" />
             </div>
           </label>
@@ -48,8 +57,26 @@
           <label class="field">
             <span>One-time setup fee</span>
             <div class="input-prefix">
-              <span>$</span>
+              <span class="currency-symbol" data-currency-symbol>$</span>
               <input type="number" id="setupFee" min="0" step="10" value="250" />
+            </div>
+          </label>
+
+          <label class="field">
+            <span>Discount (%)</span>
+            <input type="number" id="discountRate" min="0" max="100" step="1" value="0" />
+          </label>
+
+          <label class="field">
+            <span>Tax rate (%)</span>
+            <input type="number" id="taxRate" min="0" max="100" step="1" value="20" />
+          </label>
+
+          <label class="field field-toggle">
+            <span>Include tax</span>
+            <div class="toggle-row">
+              <input type="checkbox" id="includeTax" checked />
+              <span>Apply VAT / sales tax to the discounted subtotal.</span>
             </div>
           </label>
         </div>
@@ -83,7 +110,7 @@
         <label class="field">
           <span>Custom additional fee</span>
           <div class="input-prefix">
-            <span>$</span>
+            <span class="currency-symbol" data-currency-symbol>$</span>
             <input type="number" id="customFee" min="0" step="10" value="0" />
           </div>
           <small class="helper">Use for travel, materials, or one-off charges.</small>
@@ -123,12 +150,22 @@
             <span class="value" id="customFeeValue">$0</span>
           </div>
 
+          <div class="breakdown-row">
+            <span class="label" id="discountLabel">Discount (0%)</span>
+            <span class="value" id="discountValue">-$0</span>
+          </div>
+
+          <div class="breakdown-row" id="taxRow">
+            <span class="label" id="taxLabel">Tax (20%)</span>
+            <span class="value" id="taxValue">$0</span>
+          </div>
+
           <div class="divider"></div>
 
           <div class="total">
             <span>Total estimate</span>
             <strong id="totalValue">$1,870</strong>
-            <p class="muted" id="summaryNote">Based on 12 units at $120 each.</p>
+            <p class="summary-note" id="summaryNote">Based on 12 units at $120 each.</p>
           </div>
         </div>
 

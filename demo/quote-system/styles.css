@@ -97,10 +97,49 @@ body {
   transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
+.field select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fafbff;
+  font-size: 1rem;
+  appearance: none;
+}
+
 .field input:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.field select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.field-toggle {
+  gap: 12px;
+  grid-column: 1 / -1;
+}
+
+.toggle-row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fafbff;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.toggle-row input {
+  margin-top: 2px;
+  width: 18px;
+  height: 18px;
 }
 
 .input-prefix {
@@ -213,7 +252,7 @@ body {
 
 .total {
   display: grid;
-  gap: 6px;
+  gap: 10px;
   padding: 16px;
   border-radius: 16px;
   background: #101c33;
@@ -222,6 +261,13 @@ body {
 
 .total strong {
   font-size: 1.8rem;
+}
+
+.summary-note {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .callout {
@@ -245,6 +291,10 @@ body {
 
 .muted {
   color: var(--muted);
+}
+
+.is-hidden {
+  display: none;
 }
 
 @media (min-width: 900px) {
