@@ -4,10 +4,14 @@
   --card: #ffffff;
   --text: #1d2433;
   --muted: #5d667a;
-  --border: #e2e7f0;
+  --border: #d5dbe8;
+  --border-strong: #c3cbe0;
+  --field-bg: #f3f5fb;
+  --field-bg-hover: #eef2fb;
   --accent: #2b6df6;
-  --accent-soft: rgba(43, 109, 246, 0.1);
-  --shadow: 0 20px 45px rgba(19, 32, 68, 0.08);
+  --accent-soft: rgba(43, 109, 246, 0.14);
+  --shadow: 0 18px 40px rgba(19, 32, 68, 0.12);
+  --shadow-soft: 0 10px 24px rgba(19, 32, 68, 0.08);
 }
 
 * {
@@ -60,8 +64,8 @@ body {
   background: var(--card);
   border-radius: 20px;
   padding: 28px;
-  box-shadow: var(--shadow);
-  border: 1px solid var(--border);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-strong);
 }
 
 .card-header h2 {
@@ -87,24 +91,36 @@ body {
   font-size: 0.95rem;
 }
 
+.field span {
+  font-weight: 600;
+  color: #2a3347;
+}
+
 .field input {
   width: 100%;
   padding: 12px 14px;
   border-radius: 12px;
-  border: 1px solid var(--border);
-  background: #fafbff;
+  border: 1px solid var(--border-strong);
+  background: var(--field-bg);
   font-size: 1rem;
-  transition: border 0.2s ease, box-shadow 0.2s ease;
+  transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .field select {
   width: 100%;
   padding: 12px 14px;
   border-radius: 12px;
-  border: 1px solid var(--border);
-  background: #fafbff;
+  border: 1px solid var(--border-strong);
+  background: var(--field-bg);
   font-size: 1rem;
   appearance: none;
+  transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.field input:hover,
+.field select:hover {
+  border-color: #b3bfd8;
+  background: var(--field-bg-hover);
 }
 
 .field input:focus {
@@ -130,10 +146,21 @@ body {
   align-items: flex-start;
   padding: 12px 14px;
   border-radius: 12px;
-  border: 1px solid var(--border);
-  background: #fafbff;
+  border: 1px solid var(--border-strong);
+  background: var(--field-bg);
   font-size: 0.95rem;
   color: var(--muted);
+  transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.toggle-row:hover {
+  border-color: #b3bfd8;
+  background: var(--field-bg-hover);
+}
+
+.toggle-row:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .toggle-row input {
@@ -146,10 +173,21 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
-  border: 1px solid var(--border);
-  background: #fafbff;
+  border: 1px solid var(--border-strong);
+  background: var(--field-bg);
   padding: 0 12px;
   border-radius: 12px;
+  transition: border 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.input-prefix:hover {
+  border-color: #b3bfd8;
+  background: var(--field-bg-hover);
+}
+
+.input-prefix:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .input-prefix span {
@@ -190,16 +228,22 @@ body {
   align-items: center;
   gap: 12px;
   padding: 12px 14px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
   border-radius: 12px;
   background: #fff;
-  transition: border 0.2s ease, transform 0.2s ease;
+  transition: border 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
 
 .extra-item:hover {
   border-color: var(--accent);
   transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(19, 32, 68, 0.12);
+}
+
+.extra-item:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
 .extra-item input {
@@ -236,10 +280,10 @@ body {
 }
 
 .breakdown-group {
-  background: #f7f9ff;
+  background: #f3f6fd;
   border-radius: 14px;
   padding: 16px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border-strong);
   display: grid;
   gap: 10px;
 }
@@ -274,8 +318,8 @@ body {
   margin-top: 24px;
   padding: 18px;
   border-radius: 16px;
-  border: 1px solid var(--border);
-  background: #fefefe;
+  border: 1px solid var(--border-strong);
+  background: #fbfcff;
 }
 
 .callout h3 {
