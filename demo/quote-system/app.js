@@ -19,7 +19,9 @@ const elements = {
   baseLabel: document.getElementById("baseLabel"),
   baseSubtotal: document.getElementById("baseSubtotal"),
   setupFeeValue: document.getElementById("setupFeeValue"),
+  setupFeeLabel: document.getElementById("setupFeeLabel"),
   customFeeValue: document.getElementById("customFeeValue"),
+  customFeeRow: document.getElementById("customFeeRow"),
   quantityLabel: document.getElementById("quantityLabel"),
   rateLabel: document.getElementById("rateLabel"),
   discountLabel: document.getElementById("discountLabel"),
@@ -93,40 +95,95 @@ const buildExtras = () =>
     .map((input) => ({
       label: input.dataset.label || "Extra",
       amount: sanitizeNumber(input.dataset.amount),
-    }));
+    }))
+    .filter((extra) => extra.amount > 0);
+
+const buildRelevantLineItems = ({
+  setupFee,
+  extras,
+  customFee,
+  discountRate,
+  discountAmount,
+  includeTax,
+  taxAmount,
+  taxRate,
+  formatter,
+}) => {
+  const formatMoney = (value) => formatter.format(value);
+  const setupLabel = setupFee > 0 ? "Setup fee" : "Setup fee (included)";
+
+  return {
+    setup: {
+      label: setupLabel,
+      value: formatMoney(setupFee),
+      amount: setupFee,
+    },
+    extras: extras.map((extra) => ({
+      label: extra.label,
+      value: formatMoney(extra.amount),
+      amount: extra.amount,
+    })),
+    custom: {
+      label: "Custom fee",
+      value: formatMoney(customFee),
+      amount: customFee,
+      visible: customFee > 0,
+    },
+    discount: {
+      label: `Discount (${Math.round(discountRate)}%)`,
+      value: formatter.format(-discountAmount),
+      amount: discountAmount,
+      visible: discountAmount > 0 && discountRate > 0,
+    },
+    tax: {
+      label: `Tax (${Math.round(taxRate)}%)`,
+      value: formatMoney(taxAmount),
+      amount: taxAmount,
+      visible: includeTax && taxAmount > 0,
+    },
+  };
+};
 
 // Message template for client-ready quotes. Adjust wording here if needed.
 const buildQuoteMessage = ({
   serviceName,
   total,
-  discountAmount,
-  discountRate,
-  includeTax,
-  taxAmount,
-  taxRate,
   unitLabel,
   quantity,
   rate,
   formatter,
+  pricingItems,
 }) => {
   const clientName = elements.clientName.value.trim();
   const messageNote = elements.messageNote.value.trim();
   const greeting = clientName ? `Hi ${clientName},` : "Hello,";
   const formattedTotal = formatter.format(total);
   const formattedRate = formatter.format(rate);
-  const formattedDiscount = formatter.format(-discountAmount);
-  const formattedTax = formatter.format(taxAmount);
   const description = serviceName
     ? `Here’s your quote for ${serviceName.toLowerCase()}.`
     : "Here’s your quote for the requested service.";
   const lineItems = [];
 
-  if (discountRate > 0) {
-    lineItems.push(`• Discount (${Math.round(discountRate)}%): ${formattedDiscount}`);
+  if (pricingItems.setup.amount > 0) {
+    lineItems.push(`• ${pricingItems.setup.label}: ${pricingItems.setup.value}`);
+  } else {
+    lineItems.push(`• ${pricingItems.setup.label}`);
   }
 
-  if (includeTax) {
-    lineItems.push(`• Tax (${Math.round(taxRate)}%): ${formattedTax}`);
+  pricingItems.extras.forEach((extra) => {
+    lineItems.push(`• ${extra.label}: ${extra.value}`);
+  });
+
+  if (pricingItems.custom.visible) {
+    lineItems.push(`• ${pricingItems.custom.label}: ${pricingItems.custom.value}`);
+  }
+
+  if (pricingItems.discount.visible) {
+    lineItems.push(`• ${pricingItems.discount.label}: ${pricingItems.discount.value}`);
+  }
+
+  if (pricingItems.tax.visible) {
+    lineItems.push(`• ${pricingItems.tax.label}: ${pricingItems.tax.value}`);
   }
 
   const lines = [
@@ -134,12 +191,13 @@ const buildQuoteMessage = ({
     "",
     description,
     `Estimate details: ${quantity} ${unitLabel} at ${formattedRate} each.`,
-    `Total estimate: ${formattedTotal}`,
   ];
 
   if (lineItems.length) {
     lines.push("", ...lineItems);
   }
+
+  lines.push("", `Total estimate: ${formattedTotal}`);
 
   if (messageNote) {
     lines.push("", `Note: ${messageNote}`);
@@ -248,19 +306,32 @@ const updateBreakdown = () => {
   const discountedSubtotal = preDiscountSubtotal - discountAmount;
   const taxAmount = includeTax ? discountedSubtotal * (taxRate / 100) : 0;
   const total = discountedSubtotal + taxAmount;
+  const pricingItems = buildRelevantLineItems({
+    setupFee,
+    extras,
+    customFee,
+    discountRate,
+    discountAmount,
+    includeTax,
+    taxAmount,
+    taxRate,
+    formatter,
+  });
 
   updateCurrencyDisplays(formatter, symbol);
 
   elements.baseLabel.textContent = `${quantity} × ${formatMoney(rate)}`;
   elements.baseSubtotal.textContent = formatMoney(baseSubtotal);
-  elements.setupFeeValue.textContent = formatMoney(setupFee);
-  elements.customFeeValue.textContent = formatMoney(customFee);
-  elements.discountLabel.textContent = `Discount (${Math.round(discountRate)}%)`;
-  elements.discountValue.textContent = formatter.format(-discountAmount);
-  elements.discountRow.classList.toggle("is-hidden", discountRate <= 0);
-  elements.taxLabel.textContent = `Tax (${Math.round(taxRate)}%)`;
-  elements.taxValue.textContent = formatMoney(taxAmount);
-  elements.taxRow.classList.toggle("is-hidden", !includeTax);
+  elements.setupFeeLabel.textContent = pricingItems.setup.label;
+  elements.setupFeeValue.textContent = pricingItems.setup.value;
+  elements.customFeeValue.textContent = pricingItems.custom.value;
+  elements.customFeeRow.classList.toggle("is-hidden", !pricingItems.custom.visible);
+  elements.discountLabel.textContent = pricingItems.discount.label;
+  elements.discountValue.textContent = pricingItems.discount.value;
+  elements.discountRow.classList.toggle("is-hidden", !pricingItems.discount.visible);
+  elements.taxLabel.textContent = pricingItems.tax.label;
+  elements.taxValue.textContent = pricingItems.tax.value;
+  elements.taxRow.classList.toggle("is-hidden", !pricingItems.tax.visible);
   elements.taxRate.disabled = !includeTax;
   elements.taxRateField.classList.toggle("is-hidden", !includeTax);
   elements.totalValue.textContent = formatMoney(total);
@@ -271,39 +342,30 @@ const updateBreakdown = () => {
   const message = buildQuoteMessage({
     serviceName,
     total,
-    discountAmount,
-    discountRate,
-    includeTax,
-    taxAmount,
-    taxRate,
     unitLabel,
     quantity,
     rate,
     formatter,
+    pricingItems,
   });
   updateMessageActions(message);
 
   elements.extrasBreakdown.innerHTML = "";
-  const groupTitle = document.createElement("p");
-  groupTitle.className = "group-title";
-  groupTitle.textContent = "Extras";
-  elements.extrasBreakdown.appendChild(groupTitle);
+  elements.extrasBreakdown.classList.toggle(
+    "is-hidden",
+    pricingItems.extras.length === 0
+  );
 
-  if (extras.length === 0) {
-    const emptyRow = document.createElement("div");
-    emptyRow.className = "breakdown-row";
-    emptyRow.innerHTML =
-      `<span class='label'>No extras selected</span><span class='value'>${formatMoney(
-        0
-      )}</span>`;
-    elements.extrasBreakdown.appendChild(emptyRow);
-  } else {
-    extras.forEach((extra) => {
+  if (pricingItems.extras.length > 0) {
+    const groupTitle = document.createElement("p");
+    groupTitle.className = "group-title";
+    groupTitle.textContent = "Extras";
+    elements.extrasBreakdown.appendChild(groupTitle);
+
+    pricingItems.extras.forEach((extra) => {
       const row = document.createElement("div");
       row.className = "breakdown-row";
-      row.innerHTML = `<span class='label'>${extra.label}</span><span class='value'>${formatMoney(
-        extra.amount
-      )}</span>`;
+      row.innerHTML = `<span class='label'>${extra.label}</span><span class='value'>${extra.value}</span>`;
       elements.extrasBreakdown.appendChild(row);
     });
   }
