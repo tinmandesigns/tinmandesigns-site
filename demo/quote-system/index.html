@@ -203,6 +203,40 @@
         </div>
       </aside>
     </main>
+
+    <section class="card message-card" aria-labelledby="client-message">
+      <div class="card-header">
+        <h2 id="client-message">Client-ready quote message</h2>
+        <p>Generate a professional message you can copy, share, or download.</p>
+      </div>
+
+      <div class="message-grid">
+        <label class="field">
+          <span>Client name (optional)</span>
+          <input type="text" id="clientName" placeholder="e.g. Jamie" />
+        </label>
+
+        <label class="field">
+          <span>Short notes / message tweak (optional)</span>
+          <input type="text" id="messageNote" placeholder="e.g. Timeline is 2 weeks after approval." />
+        </label>
+      </div>
+
+      <div class="message-preview">
+        <label class="field">
+          <span>Message preview</span>
+          <textarea id="quoteMessage" rows="8" readonly></textarea>
+        </label>
+        <p class="muted helper">This message is ready to paste into email, SMS, or WhatsApp.</p>
+      </div>
+
+      <div class="action-panel">
+        <button class="btn btn-primary" type="button" id="copyMessage">Copy message</button>
+        <span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span>
+        <a class="btn btn-secondary" id="whatsAppShare" href="#" target="_blank" rel="noopener">Share via WhatsApp</a>
+        <button class="btn btn-secondary" type="button" id="downloadQuote">Download quote</button>
+      </div>
+    </section>
   </div>
 
   <script src="app.js"></script>
