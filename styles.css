@@ -56,7 +56,7 @@ img {
   justify-content: space-between;
   padding: 18px 0;
   gap: 16px;
-
+  flex-wrap: wrap;
 }
 
 .brand {
@@ -66,7 +66,13 @@ img {
 }
 
 .nav-links {
-
+  display: none;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  background: rgba(245, 246, 248, 0.98);
+  border-top: 1px solid var(--border);
+  padding: 12px 0 8px;
 }
 
 .nav-links a {
@@ -77,6 +83,39 @@ img {
   color: var(--text);
 }
 
+.nav-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  cursor: pointer;
+}
+
+.nav-toggle-bar {
+  width: 20px;
+  height: 2px;
+  background: var(--text);
+  border-radius: 999px;
+  display: block;
+}
+
+.nav-open .nav-links {
+  display: flex;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
 
 .hero {
   padding: 64px 0 48px;
@@ -302,8 +341,23 @@ h1 {
 }
 
 @media (min-width: 700px) {
-  .nav-links {
+  .nav {
+    align-items: center;
+  }
 
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    width: auto;
+    border-top: none;
+    padding: 0;
+    background: transparent;
+  }
+
+  .nav-toggle {
+    display: none;
   }
 
   .hero-actions {
