@@ -1,1 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instant Quote Tool</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Instant Quote</p>
+        <h1>Build a clear, professional quote in seconds.</h1>
+        <p class="subhead">
+          Transparent pricing, optional add-ons, and a live total that updates as you adjust
+          the details.
+        </p>
+      </div>
+    </header>
 
+    <main class="layout">
+      <section class="card input-card" aria-labelledby="quote-details">
+        <div class="card-header">
+          <h2 id="quote-details">Quote details</h2>
+          <p>Adjust quantities, rates, and extras to generate a precise estimate.</p>
+        </div>
+
+        <div class="form-grid">
+          <label class="field">
+            <span>Service name</span>
+            <input type="text" id="serviceName" value="Consulting hours" />
+          </label>
+
+          <label class="field">
+            <span>Quantity / hours</span>
+            <input type="number" id="quantity" min="1" step="1" value="12" />
+          </label>
+
+          <label class="field">
+            <span>Rate per unit</span>
+            <div class="input-prefix">
+              <span>$</span>
+              <input type="number" id="rate" min="0" step="5" value="120" />
+            </div>
+          </label>
+
+          <label class="field">
+            <span>One-time setup fee</span>
+            <div class="input-prefix">
+              <span>$</span>
+              <input type="number" id="setupFee" min="0" step="10" value="250" />
+            </div>
+          </label>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="extras">
+          <div>
+            <h3>Optional extras</h3>
+            <p class="muted">Select additional services that apply to this quote.</p>
+          </div>
+          <div class="extra-list">
+            <label class="extra-item">
+              <input type="checkbox" data-label="Priority turnaround" data-amount="180" checked />
+              <span>Priority turnaround</span>
+              <span class="extra-amount">$180</span>
+            </label>
+            <label class="extra-item">
+              <input type="checkbox" data-label="Executive reporting" data-amount="95" />
+              <span>Executive reporting</span>
+              <span class="extra-amount">$95</span>
+            </label>
+            <label class="extra-item">
+              <input type="checkbox" data-label="On-site visit" data-amount="320" />
+              <span>On-site visit</span>
+              <span class="extra-amount">$320</span>
+            </label>
+          </div>
+        </div>
+
+        <label class="field">
+          <span>Custom additional fee</span>
+          <div class="input-prefix">
+            <span>$</span>
+            <input type="number" id="customFee" min="0" step="10" value="0" />
+          </div>
+          <small class="helper">Use for travel, materials, or one-off charges.</small>
+        </label>
+      </section>
+
+      <aside class="card summary-card" aria-live="polite">
+        <div class="card-header">
+          <h2>Price breakdown</h2>
+          <p>Review the line items before sharing the quote.</p>
+        </div>
+
+        <div class="breakdown">
+          <div class="breakdown-row">
+            <span class="label">Base service</span>
+            <span class="value" id="baseLabel">12 × $120</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="label">Base subtotal</span>
+            <span class="value" id="baseSubtotal">$1,440</span>
+          </div>
+          <div class="breakdown-row">
+            <span class="label">Setup fee</span>
+            <span class="value" id="setupFeeValue">$250</span>
+          </div>
+
+          <div class="breakdown-group" id="extrasBreakdown">
+            <p class="group-title">Extras</p>
+            <div class="breakdown-row">
+              <span class="label">Priority turnaround</span>
+              <span class="value">$180</span>
+            </div>
+          </div>
+
+          <div class="breakdown-row">
+            <span class="label">Custom fee</span>
+            <span class="value" id="customFeeValue">$0</span>
+          </div>
+
+          <div class="divider"></div>
+
+          <div class="total">
+            <span>Total estimate</span>
+            <strong id="totalValue">$1,870</strong>
+            <p class="muted" id="summaryNote">Based on 12 units at $120 each.</p>
+          </div>
+        </div>
+
+        <div class="callout">
+          <h3>Next steps</h3>
+          <ul>
+            <li>Review scope and timelines with your client.</li>
+            <li>Confirm any optional extras that are selected.</li>
+            <li>Send the estimate as part of your proposal.</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
