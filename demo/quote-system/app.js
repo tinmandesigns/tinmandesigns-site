@@ -127,7 +127,7 @@ const updateBreakdown = () => {
   elements.taxValue.textContent = formatMoney(taxAmount);
   elements.taxRow.classList.toggle("is-hidden", !includeTax);
   elements.taxRate.disabled = !includeTax;
-  elements.taxRateField.classList.toggle("is-disabled", !includeTax);
+  elements.taxRateField.classList.toggle("is-hidden", !includeTax);
   elements.totalValue.textContent = formatMoney(total);
   elements.summaryNote.textContent = `${serviceName} · Based on ${quantity} ${unitLabel} at ${formatMoney(
     rate
