@@ -158,6 +158,15 @@ body {
   box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
+.field.is-disabled {
+  opacity: 0.55;
+}
+
+.field.is-disabled input,
+.field.is-disabled select {
+  cursor: not-allowed;
+}
+
 .field-toggle {
   gap: 12px;
   grid-column: 1 / -1;
