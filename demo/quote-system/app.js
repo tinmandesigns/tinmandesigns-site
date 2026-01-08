@@ -194,6 +194,7 @@ const buildQuoteMessage = ({
     greeting,
     "",
     description,
+    "",
     estimateContext,
   ];
 
