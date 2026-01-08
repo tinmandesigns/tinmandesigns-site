@@ -4,6 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Instant Quote Tool</title>
+  <script>
+    (function () {
+      const storageKey = "quote-theme";
+      const storedTheme = localStorage.getItem(storageKey);
+      if (storedTheme) {
+        document.documentElement.setAttribute("data-theme", storedTheme);
+        return;
+      }
+      const prefersDark = window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.setAttribute("data-theme", prefersDark ? "dark" : "light");
+    })();
+  </script>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -20,21 +33,33 @@
     </header>
 
     <div class="utility-row stagger-item" style="--stagger-delay: 160ms;">
-      <div class="locked-panel" aria-live="polite">
-        <button class="locked-entry" type="button" id="settingsPreview" aria-controls="settingsNotice" aria-expanded="false">
-          <span class="lock-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
-              <path d="M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2Zm-7-2a2 2 0 1 1 4 0v2h-4V7Zm7 12H7v-8h10v8Z" />
-            </svg>
-          </span>
-          <span class="locked-text">
-            Settings &amp; Branding
-            <span class="locked-subtext">(Standard &amp; Premium)</span>
-          </span>
-          <span class="locked-tag">Locked</span>
-        </button>
-        <div class="locked-notice is-hidden" id="settingsNotice" role="status">
-          Branding, business details, and system settings are available in the Standard and Premium tiers.
+      <div class="utility-actions">
+        <div class="locked-panel" aria-live="polite">
+          <button class="locked-entry" type="button" id="settingsPreview" aria-controls="settingsNotice" aria-expanded="false">
+            <span class="lock-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" role="img" aria-hidden="true">
+                <path d="M17 9h-1V7a4 4 0 0 0-8 0v2H7a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2Zm-7-2a2 2 0 1 1 4 0v2h-4V7Zm7 12H7v-8h10v8Z" />
+              </svg>
+            </span>
+            <span class="locked-text">
+              Settings &amp; Branding
+              <span class="locked-subtext">(Standard &amp; Premium)</span>
+            </span>
+            <span class="locked-tag">Locked</span>
+          </button>
+          <div class="locked-notice is-hidden" id="settingsNotice" role="status">
+            Branding, business details, and system settings are available in the Standard and Premium tiers.
+          </div>
+        </div>
+
+        <div class="theme-toggle" aria-live="polite">
+          <span class="theme-toggle-label">Theme</span>
+          <button class="theme-toggle-button" type="button" id="themeToggle" aria-pressed="false">
+            <span class="theme-toggle-track" aria-hidden="true">
+              <span class="theme-toggle-thumb"></span>
+            </span>
+            <span class="theme-toggle-text" id="themeToggleText">Light</span>
+          </button>
         </div>
       </div>
     </div>
