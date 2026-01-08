@@ -1029,7 +1029,8 @@ body::after {
   }
 
   .theme-toggle {
-    justify-items: start;
+    justify-content: flex-end;
+    width: 100%;
   }
 }
 
