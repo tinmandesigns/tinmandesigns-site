@@ -351,18 +351,10 @@ body::after {
 }
 
 .theme-toggle {
-  display: grid;
-  gap: 6px;
-  justify-items: end;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   min-width: 160px;
-}
-
-.theme-toggle-label {
-  font-size: 0.78rem;
-  font-weight: 600;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .theme-toggle-button {
