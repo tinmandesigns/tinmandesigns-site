@@ -34,8 +34,6 @@ const elements = {
   copyStatus: document.getElementById("copyStatus"),
   downloadQuote: document.getElementById("downloadQuote"),
   resetQuote: document.getElementById("resetQuote"),
-  settingsPreview: document.getElementById("settingsPreview"),
-  settingsNotice: document.getElementById("settingsNotice"),
   themeToggle: document.getElementById("themeToggle"),
   themeToggleText: document.getElementById("themeToggleText"),
 };
@@ -375,16 +373,6 @@ const handleDownloadQuote = () => {
   printWindow.print();
 };
 
-const handleSettingsPreview = () => {
-  if (!elements.settingsNotice || !elements.settingsPreview) {
-    return;
-  }
-
-  const isHidden = elements.settingsNotice.classList.contains("is-hidden");
-  elements.settingsNotice.classList.toggle("is-hidden", !isHidden);
-  elements.settingsPreview.setAttribute("aria-expanded", String(isHidden));
-};
-
 const resetQuoteFields = () => {
   const confirmed = window.confirm(
     "Start a new quote? This will reset all fields and clear the message."
@@ -531,10 +519,6 @@ const bindEvents = () => {
   elements.shareMessage.addEventListener("click", handleShareMessage);
   elements.downloadQuote.addEventListener("click", handleDownloadQuote);
   elements.resetQuote.addEventListener("click", resetQuoteFields);
-
-  if (elements.settingsPreview) {
-    elements.settingsPreview.addEventListener("click", handleSettingsPreview);
-  }
 
   if (elements.themeToggle) {
     elements.themeToggle.addEventListener("click", handleThemeToggle);
