@@ -30,8 +30,8 @@ const elements = {
   messageNote: document.getElementById("messageNote"),
   quoteMessage: document.getElementById("quoteMessage"),
   copyMessage: document.getElementById("copyMessage"),
+  shareMessage: document.getElementById("shareMessage"),
   copyStatus: document.getElementById("copyStatus"),
-  whatsAppShare: document.getElementById("whatsAppShare"),
   downloadQuote: document.getElementById("downloadQuote"),
 };
 
@@ -218,8 +218,6 @@ const buildQuoteMessage = ({
 
 const updateMessageActions = (message) => {
   elements.quoteMessage.value = message;
-  const encodedMessage = encodeURIComponent(message);
-  elements.whatsAppShare.href = `https://wa.me/?text=${encodedMessage}`;
 };
 
 const showCopyStatus = (text) => {
@@ -231,15 +229,9 @@ const showCopyStatus = (text) => {
   }, 2000);
 };
 
-const handleCopyMessage = async () => {
-  const message = elements.quoteMessage.value;
-  if (!message) {
-    return;
-  }
-
+const copyMessageToClipboard = async (message) => {
   try {
     await navigator.clipboard.writeText(message);
-    showCopyStatus("Copied to clipboard");
   } catch (error) {
     const fallback = document.createElement("textarea");
     fallback.value = message;
@@ -250,8 +242,40 @@ const handleCopyMessage = async () => {
     fallback.select();
     document.execCommand("copy");
     document.body.removeChild(fallback);
-    showCopyStatus("Copied to clipboard");
   }
+};
+
+const handleCopyMessage = async () => {
+  const message = elements.quoteMessage.value;
+  if (!message) {
+    return;
+  }
+
+  await copyMessageToClipboard(message);
+  showCopyStatus("Copied to clipboard");
+};
+
+const handleShareMessage = async () => {
+  const message = elements.quoteMessage.value;
+  if (!message) {
+    return;
+  }
+
+  if (navigator.share) {
+    try {
+      await navigator.share({
+        title: "Quote estimate",
+        text: message,
+      });
+      showCopyStatus("Share sheet opened");
+    } catch (error) {
+      showCopyStatus("Sharing was interrupted.");
+    }
+    return;
+  }
+
+  await copyMessageToClipboard(message);
+  showCopyStatus("Sharing isn’t supported here — message copied to clipboard.");
 };
 
 const handleDownloadQuote = () => {
@@ -402,6 +426,7 @@ const bindEvents = () => {
   });
 
   elements.copyMessage.addEventListener("click", handleCopyMessage);
+  elements.shareMessage.addEventListener("click", handleShareMessage);
   elements.downloadQuote.addEventListener("click", handleDownloadQuote);
 };
 
