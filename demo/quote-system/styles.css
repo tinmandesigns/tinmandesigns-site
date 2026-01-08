@@ -277,6 +277,11 @@ body::after {
   background: var(--field-bg-hover);
 }
 
+.input-prefix:hover {
+  border-color: rgba(31, 75, 209, 0.35);
+  background: var(--field-bg-hover);
+}
+
 .field input:focus,
 .field input:focus-visible {
   outline: none;
@@ -295,10 +300,16 @@ body::after {
 .toggle-row input:focus-visible,
 .extra-item input:focus,
 .extra-item input:focus-visible,
+.input-prefix:hover input,
 .input-prefix input:focus,
 .input-prefix input:focus-visible {
   outline: none;
   box-shadow: none;
+}
+
+.input-prefix:focus-within {
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 2px var(--accent-ring), 0 8px 16px rgba(31, 75, 209, 0.12);
 }
 
 .field.is-disabled {
