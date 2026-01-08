@@ -155,6 +155,31 @@ body::after {
   gap: var(--space-3);
 }
 
+.utility-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 var(--space-3);
+}
+
+.utility-row .locked-panel {
+  width: min(420px, 100%);
+}
+
+.utility-row .locked-entry {
+  padding: 10px 12px;
+  font-size: 0.92rem;
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(15, 23, 42, 0.2);
+}
+
+.utility-row .locked-tag {
+  font-size: 0.72rem;
+}
+
+.utility-row .locked-notice {
+  font-size: 0.88rem;
+}
+
 .card {
   background: var(--card);
   border-radius: var(--radius-xl);
@@ -742,6 +767,12 @@ body::after {
   .action-panel {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: center;
+  }
+}
+
+@media (max-width: 719px) {
+  .utility-row {
+    justify-content: flex-start;
   }
 }
 
