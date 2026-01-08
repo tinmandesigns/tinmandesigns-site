@@ -13,6 +13,7 @@
   --accent-strong: #1f4bd1;
   --accent-soft: rgba(58, 109, 255, 0.18);
   --accent-glow: rgba(58, 109, 255, 0.28);
+  --accent-ring: rgba(58, 109, 255, 0.4);
   --shadow: 0 32px 70px rgba(15, 23, 42, 0.16);
   --shadow-soft: 0 18px 48px rgba(15, 23, 42, 0.1);
   --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.7);
@@ -268,15 +269,15 @@ body::after {
 .field input:focus,
 .field input:focus-visible {
   outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 5px var(--accent-soft);
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 3px var(--accent-ring), 0 10px 18px rgba(31, 75, 209, 0.18);
 }
 
 .field select:focus,
 .field select:focus-visible {
   outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 5px var(--accent-soft);
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 3px var(--accent-ring), 0 10px 18px rgba(31, 75, 209, 0.18);
 }
 
 .toggle-row input:focus,
@@ -525,8 +526,8 @@ body::after {
 .message-preview textarea:focus,
 .message-preview textarea:focus-visible {
   outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 5px var(--accent-soft);
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 3px var(--accent-ring), 0 10px 18px rgba(31, 75, 209, 0.18);
 }
 
 .action-panel {
@@ -580,7 +581,22 @@ body::after {
 
 .btn:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 4px var(--accent-soft);
+  box-shadow: 0 0 0 3px var(--accent-ring), 0 10px 18px rgba(31, 75, 209, 0.18);
+}
+
+.toggle-row:focus-within {
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 3px var(--accent-ring), 0 10px 18px rgba(31, 75, 209, 0.18);
+}
+
+.input-prefix:focus-within {
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 3px var(--accent-ring), 0 10px 18px rgba(31, 75, 209, 0.18);
+}
+
+.extra-item:focus-within {
+  border-color: var(--accent-strong);
+  box-shadow: 0 0 0 3px var(--accent-ring), 0 10px 18px rgba(31, 75, 209, 0.18);
 }
 
 .btn:disabled {
@@ -633,19 +649,9 @@ body::after {
     background: var(--field-bg-hover);
   }
 
-  .toggle-row:focus-within {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 5px var(--accent-soft);
-  }
-
   .input-prefix:hover {
     border-color: rgba(31, 75, 209, 0.35);
     background: var(--field-bg-hover);
-  }
-
-  .input-prefix:focus-within {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 5px var(--accent-soft);
   }
 
   .extra-item:hover {
@@ -653,11 +659,6 @@ body::after {
     background: #f2f5ff;
     transform: translateY(-2px);
     box-shadow: 0 16px 28px rgba(19, 32, 68, 0.14);
-  }
-
-  .extra-item:focus-within {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 5px var(--accent-soft);
   }
 
   .btn-primary:hover {
