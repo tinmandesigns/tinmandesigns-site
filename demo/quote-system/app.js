@@ -400,6 +400,15 @@ const bindEvents = () => {
   elements.downloadQuote.addEventListener("click", handleDownloadQuote);
 };
 
+const setAppReady = () => {
+  const root = document.documentElement;
+  root.classList.remove("is-loading");
+  root.classList.add("is-ready");
+};
+
 // Initialize the interface with defaults.
 bindEvents();
 updateBreakdown();
+requestAnimationFrame(() => {
+  setAppReady();
+});

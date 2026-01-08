@@ -29,6 +29,48 @@ body {
   line-height: 1.5;
 }
 
+.is-loading .stagger-item {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.is-ready .stagger-item {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  transition-delay: var(--stagger-delay, 0ms);
+}
+
+.stagger-item {
+  will-change: opacity, transform;
+}
+
+.is-loading .stagger-item,
+.is-ready .stagger-item {
+  pointer-events: none;
+}
+
+.is-ready .stagger-item {
+  pointer-events: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-loading .stagger-item,
+  .is-ready .stagger-item {
+    transform: none;
+    transition: none;
+  }
+
+  .is-loading .stagger-item {
+    opacity: 0;
+  }
+
+  .is-ready .stagger-item {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
 .page {
   max-width: 1200px;
   margin: 0 auto;
