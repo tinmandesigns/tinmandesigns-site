@@ -523,6 +523,10 @@ body {
   transition: opacity 0.2s ease;
 }
 
+.action-panel .copy-status {
+  grid-column: 1 / -1;
+}
+
 .copy-status.is-visible {
   opacity: 1;
 }
@@ -537,11 +541,7 @@ body {
   }
 
   .action-panel {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     align-items: center;
-  }
-
-  .copy-status {
-    grid-column: 1 / -1;
   }
 }
