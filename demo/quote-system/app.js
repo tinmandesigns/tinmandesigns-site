@@ -171,8 +171,9 @@ const buildQuoteMessage = ({
   const formattedTotal = formatter.format(total);
   const formattedRate = formatter.format(rate);
   const description = serviceName
-    ? `Here’s your quote for ${serviceName.toLowerCase()}.`
-    : "Here’s your quote for the requested service.";
+    ? `Here’s your estimate for the ${serviceName.toLowerCase()} discussed.`
+    : "Here’s your estimate for the requested service.";
+  const estimateContext = `Based on ${quantity} ${unitLabel} at ${formattedRate} each, your estimate includes:`;
   const lineItems = [];
 
   if (pricingItems.setup.amount > 0) {
@@ -193,7 +194,7 @@ const buildQuoteMessage = ({
     greeting,
     "",
     description,
-    `Estimate details: ${quantity} ${unitLabel} at ${formattedRate} each.`,
+    estimateContext,
   ];
 
   if (lineItems.length) {
@@ -206,7 +207,10 @@ const buildQuoteMessage = ({
     lines.push("", `Note: ${messageNote}`);
   }
 
-  lines.push("", "If this looks good, reply and I’ll lock in the next steps.");
+  lines.push(
+    "",
+    "If everything looks good, just reply to confirm and I’ll take care of the next steps."
+  );
 
   return lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
 };
