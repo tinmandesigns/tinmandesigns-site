@@ -357,10 +357,12 @@ body::after {
   gap: 8px;
   border: 1px solid var(--border-strong);
   background: var(--field-bg);
-  padding: 0 12px;
+  padding: 0 var(--control-padding-x);
   border-radius: var(--radius-md);
   height: var(--control-height);
   width: 100%;
+  box-sizing: border-box;
+  line-height: var(--control-line-height);
   box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.06);
   transition: border var(--transition-base), box-shadow var(--transition-base),
     background var(--transition-base);
@@ -380,6 +382,15 @@ body::after {
   flex: 1;
   min-width: 0;
   box-sizing: border-box;
+}
+
+.input-prefix input:hover,
+.input-prefix input:focus,
+.input-prefix input:focus-visible {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  outline: none;
 }
 
 .helper {
