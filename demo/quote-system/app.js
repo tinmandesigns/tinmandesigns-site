@@ -36,6 +36,8 @@ const elements = {
   resetQuote: document.getElementById("resetQuote"),
   settingsPreview: document.getElementById("settingsPreview"),
   settingsNotice: document.getElementById("settingsNotice"),
+  themeToggle: document.getElementById("themeToggle"),
+  themeToggleText: document.getElementById("themeToggleText"),
 };
 
 const extraInputs = Array.from(
@@ -44,6 +46,51 @@ const extraInputs = Array.from(
 const currencySymbolTargets = Array.from(
   document.querySelectorAll("[data-currency-symbol]")
 );
+const THEME_STORAGE_KEY = "quote-theme";
+
+const getPreferredTheme = () => {
+  const stored = localStorage.getItem(THEME_STORAGE_KEY);
+  if (stored) {
+    return stored;
+  }
+
+  const prefersDark = window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+  return prefersDark ? "dark" : "light";
+};
+
+const applyTheme = (theme, { persist = false } = {}) => {
+  const normalizedTheme = theme === "dark" ? "dark" : "light";
+  document.documentElement.setAttribute("data-theme", normalizedTheme);
+
+  if (elements.themeToggle) {
+    elements.themeToggle.setAttribute(
+      "aria-pressed",
+      String(normalizedTheme === "dark")
+    );
+    elements.themeToggle.dataset.theme = normalizedTheme;
+  }
+
+  if (elements.themeToggleText) {
+    elements.themeToggleText.textContent =
+      normalizedTheme === "dark" ? "Dark" : "Light";
+  }
+
+  if (persist) {
+    localStorage.setItem(THEME_STORAGE_KEY, normalizedTheme);
+  }
+};
+
+const initializeTheme = () => {
+  applyTheme(getPreferredTheme());
+};
+
+const handleThemeToggle = () => {
+  const currentTheme =
+    document.documentElement.getAttribute("data-theme") || "light";
+  const nextTheme = currentTheme === "dark" ? "light" : "dark";
+  applyTheme(nextTheme, { persist: true });
+};
 
 const defaultState = {
   serviceName: elements.serviceName.value,
@@ -488,6 +535,10 @@ const bindEvents = () => {
   if (elements.settingsPreview) {
     elements.settingsPreview.addEventListener("click", handleSettingsPreview);
   }
+
+  if (elements.themeToggle) {
+    elements.themeToggle.addEventListener("click", handleThemeToggle);
+  }
 };
 
 const setAppReady = () => {
@@ -509,6 +560,7 @@ const triggerEntranceAnimation = () => {
 };
 
 // Initialize the interface with defaults.
+initializeTheme();
 bindEvents();
 updateBreakdown();
 triggerEntranceAnimation();
