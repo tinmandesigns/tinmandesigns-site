@@ -33,6 +33,7 @@ const elements = {
   shareMessage: document.getElementById("shareMessage"),
   copyStatus: document.getElementById("copyStatus"),
   downloadQuote: document.getElementById("downloadQuote"),
+  resetQuote: document.getElementById("resetQuote"),
 };
 
 const extraInputs = Array.from(
@@ -41,6 +42,20 @@ const extraInputs = Array.from(
 const currencySymbolTargets = Array.from(
   document.querySelectorAll("[data-currency-symbol]")
 );
+
+const defaultState = {
+  serviceName: elements.serviceName.value,
+  currency: elements.currency.value,
+  unitType: elements.unitType.value,
+  quantity: elements.quantity.value,
+  rate: elements.rate.value,
+  setupFee: elements.setupFee.value,
+  discountRate: elements.discountRate.value,
+  taxRate: elements.taxRate.value,
+  includeTax: elements.includeTax.checked,
+  customFee: elements.customFee.value,
+  extras: extraInputs.map((input) => input.checked),
+};
 
 const sanitizeNumber = (value) => {
   const numericValue = Number.parseFloat(value);
@@ -311,6 +326,34 @@ const handleDownloadQuote = () => {
   printWindow.print();
 };
 
+const resetQuoteFields = () => {
+  const confirmed = window.confirm(
+    "Start a new quote? This will reset all fields and clear the message."
+  );
+  if (!confirmed) {
+    return;
+  }
+
+  elements.serviceName.value = defaultState.serviceName;
+  elements.currency.value = defaultState.currency;
+  elements.unitType.value = defaultState.unitType;
+  elements.quantity.value = defaultState.quantity;
+  elements.rate.value = defaultState.rate;
+  elements.setupFee.value = defaultState.setupFee;
+  elements.discountRate.value = defaultState.discountRate;
+  elements.taxRate.value = defaultState.taxRate;
+  elements.includeTax.checked = defaultState.includeTax;
+  elements.customFee.value = defaultState.customFee;
+  extraInputs.forEach((input, index) => {
+    input.checked = defaultState.extras[index];
+  });
+  elements.clientName.value = "";
+  elements.messageNote.value = "";
+
+  updateBreakdown();
+  showCopyStatus("Quote reset.");
+};
+
 const updateBreakdown = () => {
   const currency = elements.currency.value;
   const formatter = getCurrencyFormatter(currency);
@@ -428,6 +471,7 @@ const bindEvents = () => {
   elements.copyMessage.addEventListener("click", handleCopyMessage);
   elements.shareMessage.addEventListener("click", handleShareMessage);
   elements.downloadQuote.addEventListener("click", handleDownloadQuote);
+  elements.resetQuote.addEventListener("click", resetQuoteFields);
 };
 
 const setAppReady = () => {

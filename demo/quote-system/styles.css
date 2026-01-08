@@ -516,6 +516,17 @@ body {
   color: var(--accent);
 }
 
+.btn-tertiary {
+  background: transparent;
+  color: var(--muted);
+  border-color: var(--border-strong);
+}
+
+.btn-tertiary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 .copy-status {
   font-size: 0.9rem;
   color: var(--muted);
@@ -529,6 +540,14 @@ body {
 
 .copy-status.is-visible {
   opacity: 1;
+}
+
+.reset-panel {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
 }
 
 @media (min-width: 720px) {
