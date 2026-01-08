@@ -480,9 +480,25 @@ const setAppReady = () => {
   root.classList.add("is-ready");
 };
 
+const triggerEntranceAnimation = () => {
+  const root = document.documentElement;
+  root.classList.remove("is-ready");
+  root.classList.add("is-loading");
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      setAppReady();
+    });
+  });
+};
+
 // Initialize the interface with defaults.
 bindEvents();
 updateBreakdown();
-requestAnimationFrame(() => {
-  setAppReady();
+triggerEntranceAnimation();
+
+window.addEventListener("pageshow", (event) => {
+  if (event.persisted) {
+    triggerEntranceAnimation();
+  }
 });
