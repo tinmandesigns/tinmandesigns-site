@@ -50,18 +50,18 @@
               <label class="field">
                 <span>Type</span>
                 <select id="unitType">
-                  <option value="units" selected>Units</option>
-                  <option value="hours">Hours</option>
+                  <option value="units">Units</option>
+                  <option value="hours" selected>Hours</option>
                 </select>
               </label>
 
               <label class="field">
-                <span id="quantityLabel">Units</span>
+                <span id="quantityLabel">Hours</span>
                 <input type="number" id="quantity" min="1" step="1" value="12" />
               </label>
 
               <label class="field">
-                <span id="rateLabel">Rate per unit</span>
+                <span id="rateLabel">Rate per hour</span>
                 <div class="input-prefix">
                   <span class="currency-symbol" data-currency-symbol>$</span>
                   <input type="number" id="rate" min="0" step="5" value="120" />
@@ -176,7 +176,7 @@
           <div class="total stagger-item" style="--stagger-delay: 360ms;">
             <span>Total estimate</span>
             <strong id="totalValue">$2,244</strong>
-            <p class="summary-note" id="summaryNote">Consulting hours · Based on 12 units at $120 each.</p>
+            <p class="summary-note" id="summaryNote">Consulting hours · Based on 12 hours at $120 each.</p>
           </div>
         </div>
 
