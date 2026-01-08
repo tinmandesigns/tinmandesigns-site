@@ -20,16 +20,9 @@ const elements = {
   baseSubtotal: document.getElementById("baseSubtotal"),
   setupFeeValue: document.getElementById("setupFeeValue"),
   setupFeeLabel: document.getElementById("setupFeeLabel"),
-  customFeeValue: document.getElementById("customFeeValue"),
-  customFeeRow: document.getElementById("customFeeRow"),
   quantityLabel: document.getElementById("quantityLabel"),
   rateLabel: document.getElementById("rateLabel"),
-  discountLabel: document.getElementById("discountLabel"),
-  discountValue: document.getElementById("discountValue"),
-  discountRow: document.getElementById("discountRow"),
-  taxRow: document.getElementById("taxRow"),
-  taxLabel: document.getElementById("taxLabel"),
-  taxValue: document.getElementById("taxValue"),
+  adjustmentsBreakdown: document.getElementById("adjustmentsBreakdown"),
   extrasBreakdown: document.getElementById("extrasBreakdown"),
   totalValue: document.getElementById("totalValue"),
   summaryNote: document.getElementById("summaryNote"),
@@ -144,6 +137,24 @@ const buildRelevantLineItems = ({
   };
 };
 
+const getAdjustmentLineItems = (pricingItems) => {
+  const adjustments = [];
+
+  if (pricingItems.custom.visible) {
+    adjustments.push(pricingItems.custom);
+  }
+
+  if (pricingItems.discount.visible) {
+    adjustments.push(pricingItems.discount);
+  }
+
+  if (pricingItems.tax.visible) {
+    adjustments.push(pricingItems.tax);
+  }
+
+  return adjustments;
+};
+
 // Message template for client-ready quotes. Adjust wording here if needed.
 const buildQuoteMessage = ({
   serviceName,
@@ -174,17 +185,9 @@ const buildQuoteMessage = ({
     lineItems.push(`• ${extra.label}: ${extra.value}`);
   });
 
-  if (pricingItems.custom.visible) {
-    lineItems.push(`• ${pricingItems.custom.label}: ${pricingItems.custom.value}`);
-  }
-
-  if (pricingItems.discount.visible) {
-    lineItems.push(`• ${pricingItems.discount.label}: ${pricingItems.discount.value}`);
-  }
-
-  if (pricingItems.tax.visible) {
-    lineItems.push(`• ${pricingItems.tax.label}: ${pricingItems.tax.value}`);
-  }
+  getAdjustmentLineItems(pricingItems).forEach((item) => {
+    lineItems.push(`• ${item.label}: ${item.value}`);
+  });
 
   const lines = [
     greeting,
@@ -324,14 +327,6 @@ const updateBreakdown = () => {
   elements.baseSubtotal.textContent = formatMoney(baseSubtotal);
   elements.setupFeeLabel.textContent = pricingItems.setup.label;
   elements.setupFeeValue.textContent = pricingItems.setup.value;
-  elements.customFeeValue.textContent = pricingItems.custom.value;
-  elements.customFeeRow.classList.toggle("is-hidden", !pricingItems.custom.visible);
-  elements.discountLabel.textContent = pricingItems.discount.label;
-  elements.discountValue.textContent = pricingItems.discount.value;
-  elements.discountRow.classList.toggle("is-hidden", !pricingItems.discount.visible);
-  elements.taxLabel.textContent = pricingItems.tax.label;
-  elements.taxValue.textContent = pricingItems.tax.value;
-  elements.taxRow.classList.toggle("is-hidden", !pricingItems.tax.visible);
   elements.taxRate.disabled = !includeTax;
   elements.taxRateField.classList.toggle("is-hidden", !includeTax);
   elements.totalValue.textContent = formatMoney(total);
@@ -351,6 +346,7 @@ const updateBreakdown = () => {
   updateMessageActions(message);
 
   elements.extrasBreakdown.innerHTML = "";
+  elements.adjustmentsBreakdown.innerHTML = "";
   elements.extrasBreakdown.classList.toggle(
     "is-hidden",
     pricingItems.extras.length === 0
@@ -369,6 +365,13 @@ const updateBreakdown = () => {
       elements.extrasBreakdown.appendChild(row);
     });
   }
+
+  getAdjustmentLineItems(pricingItems).forEach((item) => {
+    const row = document.createElement("div");
+    row.className = "breakdown-row";
+    row.innerHTML = `<span class='label'>${item.label}</span><span class='value'>${item.value}</span>`;
+    elements.adjustmentsBreakdown.appendChild(row);
+  });
 };
 
 const bindEvents = () => {
