@@ -243,6 +243,17 @@ body::after {
     background var(--transition-base);
 }
 
+.field input[type="number"] {
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.field input[type="number"]::-webkit-outer-spin-button,
+.field input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .field select {
   width: 100%;
   height: var(--control-height);
