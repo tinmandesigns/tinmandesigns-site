@@ -418,6 +418,79 @@ body::after {
   margin-bottom: var(--space-3);
 }
 
+.locked-panel {
+  display: grid;
+  gap: 12px;
+}
+
+.locked-entry {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: 1px dashed rgba(15, 23, 42, 0.28);
+  background: linear-gradient(180deg, #f9fafc 0%, #f1f4fb 100%);
+  color: var(--muted);
+  font-size: 0.98rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: border var(--transition-base), box-shadow var(--transition-base),
+    background var(--transition-base), color var(--transition-base);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.locked-entry .lock-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(15, 23, 42, 0.45);
+}
+
+.locked-entry .lock-icon svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.locked-entry .locked-text {
+  color: #2c3449;
+  font-weight: 600;
+}
+
+.locked-entry .locked-tag {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(15, 23, 42, 0.18);
+  padding: 4px 8px;
+  border-radius: 999px;
+  justify-self: end;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.locked-entry:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(31, 75, 209, 0.16);
+}
+
+.locked-notice {
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: #f6f8fe;
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
 .extra-list {
   display: grid;
   gap: var(--space-1);
@@ -695,6 +768,12 @@ body::after {
     background: #f2f5ff;
     transform: translateY(-2px);
     box-shadow: 0 16px 28px rgba(19, 32, 68, 0.14);
+  }
+
+  .locked-entry:hover {
+    border-color: rgba(15, 23, 42, 0.38);
+    background: #eef2fb;
+    color: #384055;
   }
 
   .btn-primary:hover {
