@@ -144,6 +144,14 @@ const updateUnitLabels = (unitType) => {
   return isHours ? "hours" : "units";
 };
 
+const getUnitLabelForQuantity = (unitType, quantity) => {
+  const isHours = unitType === "hours";
+  const singular = isHours ? "hour" : "unit";
+  const plural = isHours ? "hours" : "units";
+
+  return quantity === 1 ? singular : plural;
+};
+
 const buildExtras = () =>
   extraInputs
     .filter((input) => input.checked)
@@ -194,7 +202,7 @@ const buildRelevantLineItems = ({
       label: `Tax (${Math.round(taxRate)}%)`,
       value: formatMoney(taxAmount),
       amount: taxAmount,
-      visible: includeTax,
+      visible: includeTax && taxAmount > 0,
     },
   };
 };
@@ -219,7 +227,6 @@ const getAdjustmentLineItems = (pricingItems) => {
 
 // Message template for client-ready quotes. Adjust wording here if needed.
 const buildQuoteMessage = ({
-  serviceName,
   total,
   unitLabel,
   quantity,
@@ -228,52 +235,45 @@ const buildQuoteMessage = ({
   pricingItems,
 }) => {
   const clientName = elements.clientName.value.trim();
-  const messageNote = elements.messageNote.value.trim();
-  const greeting = clientName ? `Hi ${clientName},` : "Hello,";
+  const greeting = clientName ? `Hi ${clientName},` : "Hi there,";
   const formattedTotal = formatter.format(total);
   const formattedRate = formatter.format(rate);
-  const description = serviceName
-    ? `Here’s your estimate for the ${serviceName.toLowerCase()} discussed.`
-    : "Here’s your estimate for the requested service.";
-  const estimateContext = `Based on ${quantity} ${unitLabel} at ${formattedRate} each, your estimate includes:`;
-  const lineItems = [];
-
-  if (pricingItems.setup.amount > 0) {
-    lineItems.push(`• ${pricingItems.setup.label}: ${pricingItems.setup.value}`);
-  } else {
-    lineItems.push(`• ${pricingItems.setup.label}`);
-  }
+  const summaryLines = [
+    `• ${quantity} ${unitLabel} at ${formattedRate} each`,
+  ];
 
   pricingItems.extras.forEach((extra) => {
-    lineItems.push(`• ${extra.label}: ${extra.value}`);
+    summaryLines.push(`• ${extra.label}: ${extra.value}`);
   });
 
-  getAdjustmentLineItems(pricingItems).forEach((item) => {
-    lineItems.push(`• ${item.label}: ${item.value}`);
-  });
+  if (pricingItems.setup.amount > 0) {
+    summaryLines.push(`• Setup fee: ${pricingItems.setup.value}`);
+  }
+
+  if (pricingItems.custom.amount > 0) {
+    summaryLines.push(`• Additional fee: ${pricingItems.custom.value}`);
+  }
+
+  if (pricingItems.discount.amount > 0 && pricingItems.discount.visible) {
+    summaryLines.push(`• ${pricingItems.discount.label}: ${pricingItems.discount.value}`);
+  }
+
+  if (pricingItems.tax.amount > 0) {
+    summaryLines.push(`• ${pricingItems.tax.label}: ${pricingItems.tax.value}`);
+  }
 
   const lines = [
     greeting,
     "",
-    description,
+    "Here’s your estimate based on the details we discussed.",
     "",
-    estimateContext,
+    "Estimate summary:",
+    ...summaryLines,
+    "",
+    `Total estimate: ${formattedTotal}`,
+    "",
+    "If this looks good, just reply to confirm and I’ll take care of the next steps.",
   ];
-
-  if (lineItems.length) {
-    lines.push("", ...lineItems);
-  }
-
-  lines.push("", `Total estimate: ${formattedTotal}`);
-
-  if (messageNote) {
-    lines.push("", `Note: ${messageNote}`);
-  }
-
-  lines.push(
-    "",
-    "If everything looks good, just reply to confirm and I’ll take care of the next steps."
-  );
 
   return lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
 };
@@ -417,6 +417,7 @@ const updateBreakdown = () => {
   const serviceName = elements.serviceName.value.trim() || "Service";
   const unitType = elements.unitType.value;
   const unitLabel = updateUnitLabels(unitType);
+  const messageUnitLabel = getUnitLabelForQuantity(unitType, quantity);
 
   const baseSubtotal = quantity * rate;
   const extras = buildExtras();
@@ -449,14 +450,13 @@ const updateBreakdown = () => {
   elements.taxRate.disabled = !includeTax;
   elements.taxRateField.classList.toggle("is-hidden", !includeTax);
   elements.totalValue.textContent = formatMoney(total);
-  elements.summaryNote.textContent = `${serviceName} · Based on ${quantity} ${unitLabel} at ${formatMoney(
+  elements.summaryNote.textContent = `${serviceName} · Based on ${quantity} ${messageUnitLabel} at ${formatMoney(
     rate
   )} each.`;
 
   const message = buildQuoteMessage({
-    serviceName,
     total,
-    unitLabel,
+    unitLabel: messageUnitLabel,
     quantity,
     rate,
     formatter,
