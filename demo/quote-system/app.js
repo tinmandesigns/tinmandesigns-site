@@ -468,29 +468,41 @@ const generateEstimatePdf = (data) => {
       doc.rect(margin, y, contentWidth, rowHeight, "F");
     }
 
-    const textY = y + rowPadding + tableLineHeight;
+    const textBlockHeight = (labelLines.length - 1) * tableLineHeight;
+    const textCenterY = y + rowHeight / 2;
+    const textY = textCenterY - textBlockHeight / 2;
     labelLines.forEach((line, index) => {
-      doc.text(line, margin, textY + index * tableLineHeight);
+      doc.text(line, margin, textY + index * tableLineHeight, {
+        baseline: "middle",
+      });
     });
-    doc.text(item.value, pageWidth - margin, textY, { align: "right" });
+    doc.text(item.value, pageWidth - margin, textCenterY, {
+      align: "right",
+      baseline: "middle",
+    });
     y += rowHeight + rowGap;
   });
 
   const totalBlockHeight = 40;
-  const totalBlockPadding = 12;
   ensureSpace(totalBlockHeight + 24);
   y += 16;
   doc.setFillColor(238);
   doc.rect(margin, y, contentWidth, totalBlockHeight, "F");
-  const totalTextY = y + totalBlockPadding + 13;
+  const totalTextY = y + totalBlockHeight / 2;
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(12.5);
-  doc.text("Total estimate", margin + 8, totalTextY);
+  doc.text("Total estimate", margin + 8, totalTextY, { baseline: "middle" });
   doc.setFontSize(16);
-  doc.text(data.formatter.format(data.total), pageWidth - margin - 8, totalTextY, {
-    align: "right",
-  });
+  doc.text(
+    data.formatter.format(data.total),
+    pageWidth - margin - 8,
+    totalTextY,
+    {
+      align: "right",
+      baseline: "middle",
+    }
+  );
   y += totalBlockHeight + 20;
 
   doc.setFont("helvetica", "normal");
