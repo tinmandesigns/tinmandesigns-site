@@ -439,26 +439,32 @@ const generateEstimatePdf = (data) => {
   );
   y += 28;
 
+  const headerHeight = 24;
+  ensureSpace(headerHeight + 8);
+  doc.setFillColor(66, 96, 140);
+  doc.rect(margin, y, contentWidth, headerHeight, "F");
   doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
-  doc.text("Description", margin, y);
-  doc.text("Amount", pageWidth - margin, y, { align: "right" });
-  y += 18;
+  doc.setTextColor(255);
+  doc.text("DESCRIPTION", margin + 8, y + 16);
+  doc.text("AMOUNT", pageWidth - margin - 8, y + 16, { align: "right" });
+  doc.setTextColor(20);
+  y += headerHeight + 4;
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(11);
 
-  const tableLineHeight = 14;
-  const rowPadding = 6;
-  const rowGap = 8;
+  const tableLineHeight = 15;
+  const rowPadding = 7;
+  const rowGap = 0;
 
   data.lineItems.forEach((item, index) => {
     const labelLines = doc.splitTextToSize(item.label, contentWidth * 0.68);
     const rowHeight = labelLines.length * tableLineHeight + rowPadding * 2;
     ensureSpace(rowHeight + rowGap);
 
-    if (index % 2 === 1) {
-      doc.setFillColor(246);
+    if (index % 2 === 0) {
+      doc.setFillColor(248);
       doc.rect(margin, y, contentWidth, rowHeight, "F");
     }
 
@@ -467,23 +473,22 @@ const generateEstimatePdf = (data) => {
       doc.text(line, margin, textY + index * tableLineHeight);
     });
     doc.text(item.value, pageWidth - margin, textY, { align: "right" });
-    y += rowHeight;
-    y += rowGap;
+    y += rowHeight + rowGap;
   });
 
-  const totalBlockHeight = 36;
-  const totalBlockPadding = 10;
-  ensureSpace(totalBlockHeight + 20);
-  y += 12;
-  doc.setFillColor(242);
+  const totalBlockHeight = 40;
+  const totalBlockPadding = 12;
+  ensureSpace(totalBlockHeight + 24);
+  y += 16;
+  doc.setFillColor(238);
   doc.rect(margin, y, contentWidth, totalBlockHeight, "F");
-  const totalTextY = y + totalBlockPadding + 12;
+  const totalTextY = y + totalBlockPadding + 13;
 
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(12);
-  doc.text("Total estimate:", margin, totalTextY);
-  doc.setFontSize(15);
-  doc.text(data.formatter.format(data.total), pageWidth - margin, totalTextY, {
+  doc.setFontSize(12.5);
+  doc.text("Total estimate", margin + 8, totalTextY);
+  doc.setFontSize(16);
+  doc.text(data.formatter.format(data.total), pageWidth - margin - 8, totalTextY, {
     align: "right",
   });
   y += totalBlockHeight + 20;
