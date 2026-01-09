@@ -453,19 +453,26 @@ const generateEstimatePdf = (data) => {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(11);
 
+  const tableLineHeight = 14;
+  const rowPadding = 6;
+  const rowGap = 8;
+
   data.lineItems.forEach((item) => {
     const labelLines = doc.splitTextToSize(item.label, contentWidth * 0.68);
-    const rowHeight = Math.max(labelLines.length * 14, 14) + 12;
-    ensureSpace(rowHeight + 12);
+    const rowHeight = labelLines.length * tableLineHeight + rowPadding * 2;
+    ensureSpace(rowHeight + rowGap);
 
-    doc.text(labelLines, margin, y);
-    doc.text(item.value, pageWidth - margin, y, { align: "right" });
-    y += labelLines.length * 14;
+    const textY = y + rowPadding + tableLineHeight;
+    labelLines.forEach((line, index) => {
+      doc.text(line, margin, textY + index * tableLineHeight);
+    });
+    doc.text(item.value, pageWidth - margin, textY, { align: "right" });
+    y += rowHeight;
 
     doc.setDrawColor(230);
     doc.setLineWidth(0.75);
-    doc.line(margin, y + 6, pageWidth - margin, y + 6);
-    y += 16;
+    doc.line(margin, y, pageWidth - margin, y);
+    y += rowGap;
   });
 
   ensureSpace(48);
