@@ -440,14 +440,17 @@ const generateEstimatePdf = (data) => {
   y += 28;
 
   const headerHeight = 24;
+  const cellPadding = 8;
   ensureSpace(headerHeight + 8);
   doc.setFillColor(66, 96, 140);
   doc.rect(margin, y, contentWidth, headerHeight, "F");
   doc.setFont("helvetica", "bold");
   doc.setFontSize(11);
   doc.setTextColor(255);
-  doc.text("DESCRIPTION", margin + 8, y + 16);
-  doc.text("AMOUNT", pageWidth - margin - 8, y + 16, { align: "right" });
+  doc.text("DESCRIPTION", margin + cellPadding, y + 16);
+  doc.text("AMOUNT", pageWidth - margin - cellPadding, y + 16, {
+    align: "right",
+  });
   doc.setTextColor(20);
   y += headerHeight + 4;
 
@@ -472,11 +475,11 @@ const generateEstimatePdf = (data) => {
     const textCenterY = y + rowHeight / 2;
     const textY = textCenterY - textBlockHeight / 2;
     labelLines.forEach((line, index) => {
-      doc.text(line, margin, textY + index * tableLineHeight, {
+      doc.text(line, margin + cellPadding, textY + index * tableLineHeight, {
         baseline: "middle",
       });
     });
-    doc.text(item.value, pageWidth - margin, textCenterY, {
+    doc.text(item.value, pageWidth - margin - cellPadding, textCenterY, {
       align: "right",
       baseline: "middle",
     });
@@ -492,11 +495,13 @@ const generateEstimatePdf = (data) => {
 
   doc.setFont("helvetica", "bold");
   doc.setFontSize(12.5);
-  doc.text("Total estimate", margin + 8, totalTextY, { baseline: "middle" });
+  doc.text("Total estimate", margin + cellPadding, totalTextY, {
+    baseline: "middle",
+  });
   doc.setFontSize(16);
   doc.text(
     data.formatter.format(data.total),
-    pageWidth - margin - 8,
+    pageWidth - margin - cellPadding,
     totalTextY,
     {
       align: "right",
