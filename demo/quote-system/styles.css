@@ -76,6 +76,18 @@
   --btn-secondary-hover-border: rgba(31, 75, 209, 0.35);
   --btn-tertiary-hover-bg: rgba(232, 238, 252, 0.5);
   --btn-tertiary-hover-text: #2a3550;
+  --btn-share-bg: rgba(20, 115, 86, 0.12);
+  --btn-share-border: rgba(20, 115, 86, 0.35);
+  --btn-share-text: #1a5d49;
+  --btn-share-hover-bg: rgba(20, 115, 86, 0.2);
+  --btn-share-hover-border: rgba(20, 115, 86, 0.5);
+  --btn-share-ring: rgba(20, 115, 86, 0.35);
+  --btn-pdf-bg: rgba(15, 23, 42, 0.08);
+  --btn-pdf-border: rgba(15, 23, 42, 0.22);
+  --btn-pdf-text: #243049;
+  --btn-pdf-hover-bg: rgba(15, 23, 42, 0.14);
+  --btn-pdf-hover-border: rgba(15, 23, 42, 0.3);
+  --btn-pdf-ring: rgba(15, 23, 42, 0.28);
   --theme-toggle-bg: rgba(255, 255, 255, 0.86);
   --theme-toggle-border: rgba(15, 23, 42, 0.18);
   --theme-toggle-shadow: 0 10px 22px rgba(15, 23, 42, 0.1);
@@ -173,6 +185,18 @@ html[data-theme="dark"] {
   --btn-secondary-hover-border: rgba(109, 147, 255, 0.55);
   --btn-tertiary-hover-bg: rgba(109, 147, 255, 0.12);
   --btn-tertiary-hover-text: #d3ddff;
+  --btn-share-bg: rgba(48, 181, 140, 0.16);
+  --btn-share-border: rgba(48, 181, 140, 0.45);
+  --btn-share-text: #d7f6ec;
+  --btn-share-hover-bg: rgba(48, 181, 140, 0.26);
+  --btn-share-hover-border: rgba(48, 181, 140, 0.6);
+  --btn-share-ring: rgba(48, 181, 140, 0.45);
+  --btn-pdf-bg: rgba(148, 163, 184, 0.16);
+  --btn-pdf-border: rgba(148, 163, 184, 0.32);
+  --btn-pdf-text: #e4e9f7;
+  --btn-pdf-hover-bg: rgba(148, 163, 184, 0.26);
+  --btn-pdf-hover-border: rgba(148, 163, 184, 0.42);
+  --btn-pdf-ring: rgba(148, 163, 184, 0.4);
   --theme-toggle-bg: rgba(17, 23, 37, 0.92);
   --theme-toggle-border: rgba(148, 163, 184, 0.32);
   --theme-toggle-shadow: 0 10px 22px rgba(5, 8, 18, 0.6);
@@ -990,6 +1014,38 @@ body::after {
   background: transparent;
   color: var(--muted);
   border-color: var(--border);
+}
+
+.btn-share {
+  background: var(--btn-share-bg);
+  color: var(--btn-share-text);
+  border-color: var(--btn-share-border);
+  box-shadow: none;
+}
+
+.btn-pdf {
+  background: var(--btn-pdf-bg);
+  color: var(--btn-pdf-text);
+  border-color: var(--btn-pdf-border);
+  box-shadow: none;
+}
+
+.btn-share:hover {
+  background: var(--btn-share-hover-bg);
+  border-color: var(--btn-share-hover-border);
+}
+
+.btn-pdf:hover {
+  background: var(--btn-pdf-hover-bg);
+  border-color: var(--btn-pdf-hover-border);
+}
+
+.btn-share:focus-visible {
+  box-shadow: 0 0 0 2px var(--btn-share-ring), var(--focus-shadow);
+}
+
+.btn-pdf:focus-visible {
+  box-shadow: 0 0 0 2px var(--btn-pdf-ring), var(--focus-shadow);
 }
 
 .btn:active {
