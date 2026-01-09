@@ -499,7 +499,8 @@ body::after {
   color: var(--text-strong);
 }
 
-.field input {
+.field input,
+.field textarea {
   width: 100%;
   height: var(--control-height);
   padding: 0 var(--control-padding-x);
@@ -513,6 +514,13 @@ body::after {
   box-sizing: border-box;
   transition: border var(--transition-base), box-shadow var(--transition-base),
     background var(--transition-base), color var(--transition-theme);
+}
+
+.field textarea {
+  min-height: 120px;
+  padding: 12px var(--control-padding-x);
+  line-height: 1.4;
+  resize: vertical;
 }
 
 .field input[type="number"] {
@@ -544,6 +552,7 @@ body::after {
 }
 
 .field input:hover,
+.field textarea:hover,
 .field select:hover {
   border-color: var(--field-hover-border);
   background: var(--field-bg-hover);
@@ -555,7 +564,9 @@ body::after {
 }
 
 .field input:focus,
-.field input:focus-visible {
+.field input:focus-visible,
+.field textarea:focus,
+.field textarea:focus-visible {
   outline: none;
   border-color: var(--accent-strong);
   box-shadow: 0 0 0 2px var(--accent-ring), var(--focus-shadow);
@@ -922,6 +933,7 @@ body::after {
   background: var(--field-bg);
   font-size: 0.98rem;
   line-height: 1.5;
+  white-space: pre-wrap;
   resize: vertical;
   color: var(--text);
   box-shadow: var(--field-shadow);

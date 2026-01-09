@@ -235,6 +235,7 @@ const buildQuoteMessage = ({
   pricingItems,
 }) => {
   const clientName = elements.clientName.value.trim();
+  const note = elements.messageNote.value.trim();
   const greeting = clientName ? `Hi ${clientName},` : "Hi there,";
   const formattedTotal = formatter.format(total);
   const formattedRate = formatter.format(rate);
@@ -269,11 +270,18 @@ const buildQuoteMessage = ({
     "",
     "Estimate summary:",
     ...summaryLines,
+  ];
+
+  if (note) {
+    lines.push("", "Notes:", note);
+  }
+
+  lines.push(
     "",
     `Total estimate: ${formattedTotal}`,
     "",
-    "If this looks good, just reply to confirm and I’ll take care of the next steps.",
-  ];
+    "If this looks good, just reply to confirm and I’ll take care of the next steps."
+  );
 
   return lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
 };
