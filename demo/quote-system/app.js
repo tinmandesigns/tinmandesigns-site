@@ -443,12 +443,7 @@ const generateEstimatePdf = (data) => {
   doc.setFontSize(11);
   doc.text("Description", margin, y);
   doc.text("Amount", pageWidth - margin, y, { align: "right" });
-  y += 12;
-
-  doc.setDrawColor(220);
-  doc.setLineWidth(1);
-  doc.line(margin, y, pageWidth - margin, y);
-  y += 12;
+  y += 18;
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(11);
@@ -457,10 +452,15 @@ const generateEstimatePdf = (data) => {
   const rowPadding = 6;
   const rowGap = 8;
 
-  data.lineItems.forEach((item) => {
+  data.lineItems.forEach((item, index) => {
     const labelLines = doc.splitTextToSize(item.label, contentWidth * 0.68);
     const rowHeight = labelLines.length * tableLineHeight + rowPadding * 2;
     ensureSpace(rowHeight + rowGap);
+
+    if (index % 2 === 1) {
+      doc.setFillColor(246);
+      doc.rect(margin, y, contentWidth, rowHeight, "F");
+    }
 
     const textY = y + rowPadding + tableLineHeight;
     labelLines.forEach((line, index) => {
@@ -468,26 +468,25 @@ const generateEstimatePdf = (data) => {
     });
     doc.text(item.value, pageWidth - margin, textY, { align: "right" });
     y += rowHeight;
-
-    doc.setDrawColor(230);
-    doc.setLineWidth(0.75);
-    doc.line(margin, y, pageWidth - margin, y);
     y += rowGap;
   });
 
-  ensureSpace(48);
-  doc.setDrawColor(210);
-  doc.setLineWidth(1);
-  doc.line(margin, y, pageWidth - margin, y);
-  y += 20;
+  const totalBlockHeight = 36;
+  const totalBlockPadding = 10;
+  ensureSpace(totalBlockHeight + 20);
+  y += 12;
+  doc.setFillColor(242);
+  doc.rect(margin, y, contentWidth, totalBlockHeight, "F");
+  const totalTextY = y + totalBlockPadding + 12;
 
   doc.setFont("helvetica", "bold");
-  doc.setFontSize(13);
-  doc.text("Total estimate:", margin, y);
-  doc.text(data.formatter.format(data.total), pageWidth - margin, y, {
+  doc.setFontSize(12);
+  doc.text("Total estimate:", margin, totalTextY);
+  doc.setFontSize(15);
+  doc.text(data.formatter.format(data.total), pageWidth - margin, totalTextY, {
     align: "right",
   });
-  y += 30;
+  y += totalBlockHeight + 20;
 
   doc.setFont("helvetica", "normal");
   doc.setFontSize(11);
