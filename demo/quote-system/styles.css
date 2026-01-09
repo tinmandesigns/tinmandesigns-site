@@ -68,9 +68,9 @@
   --total-border: rgba(255, 255, 255, 0.12);
   --total-shadow: 0 20px 40px rgba(12, 24, 48, 0.3);
   --summary-note: rgba(255, 255, 255, 0.75);
-  --btn-secondary-bg: rgba(255, 255, 255, 0.9);
-  --btn-secondary-border: rgba(15, 23, 42, 0.15);
-  --btn-secondary-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+  --btn-secondary-bg: rgba(255, 255, 255, 0.96);
+  --btn-secondary-border: rgba(15, 23, 42, 0.22);
+  --btn-secondary-shadow: 0 8px 18px rgba(15, 23, 42, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.85);
   --btn-secondary-hover-bg: #eef2ff;
   --btn-secondary-hover-text: #1f2b45;
   --btn-secondary-hover-border: rgba(31, 75, 209, 0.35);
@@ -183,9 +183,9 @@ html[data-theme="dark"] {
   --total-border: rgba(255, 255, 255, 0.2);
   --total-shadow: 0 20px 40px rgba(6, 12, 24, 0.6);
   --summary-note: rgba(230, 236, 255, 0.7);
-  --btn-secondary-bg: rgba(21, 28, 45, 0.95);
-  --btn-secondary-border: rgba(148, 163, 184, 0.25);
-  --btn-secondary-shadow: 0 10px 22px rgba(4, 8, 20, 0.5);
+  --btn-secondary-bg: rgba(24, 32, 50, 0.96);
+  --btn-secondary-border: rgba(148, 163, 184, 0.4);
+  --btn-secondary-shadow: 0 10px 22px rgba(4, 8, 20, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   --btn-secondary-hover-bg: #1b243a;
   --btn-secondary-hover-text: #f4f7ff;
   --btn-secondary-hover-border: rgba(109, 147, 255, 0.55);
