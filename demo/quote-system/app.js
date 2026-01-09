@@ -286,6 +286,234 @@ const buildQuoteMessage = ({
   return lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
 };
 
+const getFormattedDate = () => {
+  const formatter = new Intl.DateTimeFormat(navigator.language, {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  });
+  return formatter.format(new Date());
+};
+
+const getSafeFilename = (clientName) => {
+  const safeName = clientName
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .replace(/-+/g, "-");
+  return safeName ? `estimate-${safeName}.pdf` : "estimate.pdf";
+};
+
+const getQuoteData = () => {
+  const currency = elements.currency.value;
+  const formatter = getCurrencyFormatter(currency);
+
+  const quantity = Math.max(1, sanitizeNumber(elements.quantity.value));
+  const rate = Math.max(0, sanitizeNumber(elements.rate.value));
+  const setupFee = Math.max(0, sanitizeNumber(elements.setupFee.value));
+  const discountRate = Math.max(0, sanitizeNumber(elements.discountRate.value));
+  const taxRate = Math.max(0, sanitizeNumber(elements.taxRate.value));
+  const includeTax = elements.includeTax.checked;
+  const customFee = Math.max(0, sanitizeNumber(elements.customFee.value));
+  const serviceName = elements.serviceName.value.trim() || "Service";
+  const unitType = elements.unitType.value;
+  const unitLabel = getUnitLabelForQuantity(unitType, quantity);
+  const clientName = elements.clientName.value.trim();
+  const note = elements.messageNote.value.trim();
+
+  const baseSubtotal = quantity * rate;
+  const extras = buildExtras();
+  const extrasTotal = extras.reduce((sum, extra) => sum + extra.amount, 0);
+  const preDiscountSubtotal =
+    baseSubtotal + setupFee + extrasTotal + customFee;
+  const discountAmount = preDiscountSubtotal * (discountRate / 100);
+  const discountedSubtotal = preDiscountSubtotal - discountAmount;
+  const taxAmount = includeTax ? discountedSubtotal * (taxRate / 100) : 0;
+  const total = discountedSubtotal + taxAmount;
+  const pricingItems = buildRelevantLineItems({
+    setupFee,
+    extras,
+    customFee,
+    discountRate,
+    discountAmount,
+    includeTax,
+    taxAmount,
+    taxRate,
+    formatter,
+  });
+
+  const lineItems = [
+    {
+      label: `${quantity} ${unitLabel} @ ${formatter.format(rate)}`,
+      value: formatter.format(baseSubtotal),
+    },
+    ...pricingItems.extras.map((extra) => ({
+      label: extra.label,
+      value: extra.value,
+    })),
+  ];
+
+  if (pricingItems.setup.amount > 0) {
+    lineItems.push({
+      label: pricingItems.setup.label,
+      value: pricingItems.setup.value,
+    });
+  }
+
+  if (pricingItems.custom.amount > 0) {
+    lineItems.push({
+      label: "Additional fee",
+      value: pricingItems.custom.value,
+    });
+  }
+
+  if (pricingItems.discount.amount > 0 && pricingItems.discount.visible) {
+    lineItems.push({
+      label: pricingItems.discount.label,
+      value: pricingItems.discount.value,
+    });
+  }
+
+  if (pricingItems.tax.amount > 0 && pricingItems.tax.visible) {
+    lineItems.push({
+      label: pricingItems.tax.label,
+      value: pricingItems.tax.value,
+    });
+  }
+
+  return {
+    formatter,
+    serviceName,
+    quantity,
+    rate,
+    total,
+    clientName,
+    note,
+    lineItems,
+  };
+};
+
+const generateEstimatePdf = (data) => {
+  const { jsPDF } = window.jspdf || {};
+  if (!jsPDF) {
+    return;
+  }
+
+  const doc = new jsPDF({ unit: "pt", format: "a4" });
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const pageHeight = doc.internal.pageSize.getHeight();
+  const margin = 48;
+  const contentWidth = pageWidth - margin * 2;
+  let y = margin;
+
+  const ensureSpace = (needed) => {
+    if (y + needed <= pageHeight - margin) {
+      return;
+    }
+    doc.addPage();
+    y = margin;
+  };
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(22);
+  doc.text("Estimate", margin, y);
+  y += 26;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(11);
+
+  if (data.clientName) {
+    doc.text(`Prepared for: ${data.clientName}`, margin, y);
+    y += 18;
+  }
+
+  doc.text(`Generated on: ${getFormattedDate()}`, margin, y);
+  y += 24;
+
+  doc.setFontSize(12);
+  doc.text(
+    "This estimate is based on the details discussed and is provided for review.",
+    margin,
+    y,
+    { maxWidth: contentWidth }
+  );
+  y += 28;
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(11);
+  doc.text("Description", margin, y);
+  doc.text("Amount", pageWidth - margin, y, { align: "right" });
+  y += 12;
+
+  doc.setDrawColor(220);
+  doc.setLineWidth(1);
+  doc.line(margin, y, pageWidth - margin, y);
+  y += 12;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(11);
+
+  data.lineItems.forEach((item) => {
+    const labelLines = doc.splitTextToSize(item.label, contentWidth * 0.68);
+    const rowHeight = Math.max(labelLines.length * 14, 14) + 12;
+    ensureSpace(rowHeight + 12);
+
+    doc.text(labelLines, margin, y);
+    doc.text(item.value, pageWidth - margin, y, { align: "right" });
+    y += labelLines.length * 14;
+
+    doc.setDrawColor(230);
+    doc.setLineWidth(0.75);
+    doc.line(margin, y + 6, pageWidth - margin, y + 6);
+    y += 16;
+  });
+
+  ensureSpace(48);
+  doc.setDrawColor(210);
+  doc.setLineWidth(1);
+  doc.line(margin, y, pageWidth - margin, y);
+  y += 20;
+
+  doc.setFont("helvetica", "bold");
+  doc.setFontSize(13);
+  doc.text("Total estimate:", margin, y);
+  doc.text(data.formatter.format(data.total), pageWidth - margin, y, {
+    align: "right",
+  });
+  y += 30;
+
+  doc.setFont("helvetica", "normal");
+  doc.setFontSize(11);
+
+  if (data.note) {
+    ensureSpace(48);
+    doc.setFont("helvetica", "bold");
+    doc.text("Notes:", margin, y);
+    y += 16;
+    doc.setFont("helvetica", "normal");
+    const noteLines = data.note.split(/\r?\n/).flatMap((line) =>
+      doc.splitTextToSize(line, contentWidth)
+    );
+    noteLines.forEach((line) => {
+      ensureSpace(18);
+      doc.text(line, margin, y);
+      y += 16;
+    });
+    y += 10;
+  }
+
+  ensureSpace(40);
+  doc.setFontSize(11);
+  doc.text(
+    "If this looks good, just reply to confirm and I’ll take care of the next steps.",
+    margin,
+    y,
+    { maxWidth: contentWidth }
+  );
+
+  doc.save(getSafeFilename(data.clientName));
+};
+
 const updateMessageActions = (message) => {
   elements.quoteMessage.value = message;
 };
@@ -349,36 +577,7 @@ const handleShareMessage = async () => {
 };
 
 const handleDownloadQuote = () => {
-  const message = elements.quoteMessage.value.trim();
-  if (!message) {
-    return;
-  }
-
-  const printWindow = window.open("", "_blank");
-  if (!printWindow) {
-    return;
-  }
-
-  const safeMessage = message.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-  printWindow.document.write(`
-    <html>
-      <head>
-        <title>Quote</title>
-        <style>
-          body { font-family: "Inter", Arial, sans-serif; padding: 32px; color: #1d2433; }
-          h1 { font-size: 1.4rem; margin-bottom: 16px; }
-          pre { white-space: pre-wrap; font-size: 1rem; line-height: 1.6; }
-        </style>
-      </head>
-      <body>
-        <h1>Quote message</h1>
-        <pre>${safeMessage}</pre>
-      </body>
-    </html>
-  `);
-  printWindow.document.close();
-  printWindow.focus();
-  printWindow.print();
+  generateEstimatePdf(getQuoteData());
 };
 
 const resetQuoteFields = () => {
