@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" class="is-loading" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Promo Layout - Quote Tool</title>
+  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="promo.css" />
+</head>
+<body>
+  <div class="promo-page">
+    <header class="promo-header">
+      <h1>Professional quotes, ready to send</h1>
+      <p>Pricing → client-ready message → estimate output</p>
+    </header>
+
+    <section class="promo-columns">
+      <div class="promo-column">
+        <span class="promo-label">Calculate</span>
+        <div class="promo-stack">
+          <section class="card input-card" aria-labelledby="quote-details">
+            <div class="card-header">
+              <h2 id="quote-details">Quote details</h2>
+              <p>Adjust quantities, rates, and extras to generate a precise estimate.</p>
+            </div>
+
+            <div class="form-sections">
+              <section class="form-section">
+                <div class="section-header">
+                  <h3>Core pricing</h3>
+                  <p class="muted">Define the base service and standard fees.</p>
+                </div>
+                <div class="form-grid">
+                  <label class="field">
+                    <span>Service name</span>
+                    <input type="text" id="serviceName" value="Strategy consulting" />
+                  </label>
+
+                  <label class="field">
+                    <span>Currency</span>
+                    <select id="currency">
+                      <option value="GBP">GBP (£)</option>
+                      <option value="USD" selected>USD ($)</option>
+                      <option value="EUR">EUR (€)</option>
+                    </select>
+                  </label>
+
+                  <label class="field">
+                    <span>Type</span>
+                    <select id="unitType">
+                      <option value="units">Units</option>
+                      <option value="hours" selected>Hours</option>
+                    </select>
+                  </label>
+
+                  <label class="field">
+                    <span id="quantityLabel">Hours</span>
+                    <input type="number" id="quantity" min="1" step="1" value="16" />
+                  </label>
+
+                  <label class="field">
+                    <span id="rateLabel">Rate per hour</span>
+                    <div class="input-prefix">
+                      <span class="currency-symbol" data-currency-symbol>$</span>
+                      <input type="number" id="rate" min="0" step="5" value="145" />
+                    </div>
+                  </label>
+
+                  <label class="field">
+                    <span>One-time setup fee</span>
+                    <div class="input-prefix">
+                      <span class="currency-symbol" data-currency-symbol>$</span>
+                      <input type="number" id="setupFee" min="0" step="10" value="300" />
+                    </div>
+                  </label>
+                </div>
+              </section>
+
+              <section class="form-section">
+                <div class="section-header">
+                  <h3>Adjustments</h3>
+                  <p class="muted">Apply discounts, tax, and additional charges.</p>
+                </div>
+                <div class="form-grid">
+                  <label class="field">
+                    <span>Discount (%)</span>
+                    <input type="number" id="discountRate" min="0" max="100" step="1" value="8" />
+                  </label>
+
+                  <label class="field field-toggle">
+                    <span>Include tax</span>
+                    <div class="toggle-row">
+                      <input type="checkbox" id="includeTax" checked />
+                      <span>Apply VAT / sales tax to the discounted subtotal.</span>
+                    </div>
+                  </label>
+
+                  <label class="field" id="taxRateField">
+                    <span>Tax rate (%)</span>
+                    <input type="number" id="taxRate" min="0" max="100" step="1" value="12" />
+                  </label>
+
+                  <label class="field">
+                    <span>Custom additional fee</span>
+                    <div class="input-prefix">
+                      <span class="currency-symbol" data-currency-symbol>$</span>
+                      <input type="number" id="customFee" min="0" step="10" value="120" />
+                    </div>
+                    <small class="helper">Use for travel, materials, or one-off charges.</small>
+                  </label>
+                </div>
+              </section>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="extras">
+              <div>
+                <h3>Optional extras</h3>
+                <p class="muted">Select additional services that apply to this quote.</p>
+              </div>
+              <div class="extra-list">
+                <label class="extra-item">
+                  <input type="checkbox" data-label="Priority turnaround" data-amount="180" checked />
+                  <span>Priority turnaround</span>
+                  <span class="extra-amount">$180</span>
+                </label>
+                <label class="extra-item">
+                  <input type="checkbox" data-label="Executive reporting" data-amount="95" checked />
+                  <span>Executive reporting</span>
+                  <span class="extra-amount">$95</span>
+                </label>
+                <label class="extra-item">
+                  <input type="checkbox" data-label="On-site visit" data-amount="320" />
+                  <span>On-site visit</span>
+                  <span class="extra-amount">$320</span>
+                </label>
+              </div>
+            </div>
+          </section>
+
+          <aside class="card summary-card" aria-live="polite">
+            <div class="card-header">
+              <h2>Price breakdown</h2>
+              <p>Review the line items before sharing the quote.</p>
+            </div>
+
+            <div class="breakdown">
+              <div class="breakdown-row">
+                <span class="label">Base service</span>
+                <span class="value" id="baseLabel">16 × $145</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="label">Base subtotal</span>
+                <span class="value" id="baseSubtotal">$2,320</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="label" id="setupFeeLabel">Setup fee</span>
+                <span class="value" id="setupFeeValue">$300</span>
+              </div>
+
+              <div class="breakdown-group" id="extrasBreakdown">
+                <p class="group-title">Extras</p>
+                <div class="breakdown-row">
+                  <span class="label">Priority turnaround</span>
+                  <span class="value">$180</span>
+                </div>
+              </div>
+
+              <div id="adjustmentsBreakdown"></div>
+
+              <div class="divider"></div>
+
+              <div class="total">
+                <span>Total estimate</span>
+                <strong id="totalValue">$2,935</strong>
+                <p class="summary-note" id="summaryNote">
+                  Strategy consulting · Based on 16 hours at $145 each.
+                </p>
+              </div>
+            </div>
+
+            <div class="callout">
+              <h3>Next steps</h3>
+              <ul>
+                <li>Review scope and timelines with your client.</li>
+                <li>Confirm any optional extras that are selected.</li>
+                <li>Send the estimate as part of your proposal.</li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </div>
+
+      <div class="promo-column">
+        <span class="promo-label">Client message</span>
+        <section class="card message-card" aria-labelledby="client-message">
+          <div class="card-header">
+            <h2 id="client-message">Client-ready quote message</h2>
+            <p>Generate a professional message you can copy, share, or download.</p>
+          </div>
+
+          <div class="message-grid">
+            <label class="field">
+              <span>Client name (optional)</span>
+              <input type="text" id="clientName" value="Taylor" />
+            </label>
+
+            <label class="field">
+              <span>Short notes / message tweak (optional)</span>
+              <textarea id="messageNote" rows="3">Estimate valid for 14 days.</textarea>
+            </label>
+          </div>
+
+          <div class="message-preview">
+            <label class="field">
+              <span>Message preview</span>
+              <textarea id="quoteMessage" rows="8" readonly></textarea>
+            </label>
+            <p class="muted helper">This message is ready to share or paste into your preferred app.</p>
+          </div>
+
+          <div class="action-panel">
+            <button class="btn btn-secondary" type="button" id="copyMessage">Copy message</button>
+            <button class="btn btn-share" type="button" id="shareMessage">Share</button>
+            <button class="btn btn-pdf" type="button" id="downloadQuote">Download PDF</button>
+            <span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span>
+          </div>
+
+          <div class="reset-panel">
+            <button class="btn btn-tertiary" type="button" id="resetQuote">Start new quote</button>
+            <span class="helper">Clears the inputs and message without changing your theme.</span>
+          </div>
+        </section>
+      </div>
+
+      <div class="promo-column">
+        <span class="promo-label">PDF estimate</span>
+        <section class="card pdf-card" aria-labelledby="pdf-estimate">
+          <div class="card-header">
+            <h2 id="pdf-estimate">Estimate PDF</h2>
+            <p>Reserved space for a finished document preview.</p>
+          </div>
+          <div class="pdf-frame">
+            <div class="pdf-sheet" aria-hidden="true">
+              <div class="pdf-sheet-header"></div>
+              <div class="pdf-sheet-line medium"></div>
+              <div class="pdf-sheet-line"></div>
+              <div class="pdf-sheet-line short"></div>
+              <div class="pdf-sheet-line"></div>
+              <div class="pdf-sheet-line medium"></div>
+              <div class="pdf-sheet-total"></div>
+            </div>
+            <p class="pdf-note">Drop the exported PDF capture here in post.</p>
+          </div>
+        </section>
+      </div>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="../app.js"></script>
+  <script>
+    document.documentElement.setAttribute("data-theme", "dark");
+  </script>
+</body>
+</html>
