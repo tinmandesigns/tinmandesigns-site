@@ -26,13 +26,28 @@
 
 .promo-columns {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 32px;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr) minmax(0, 0.9fr);
+  gap: 48px;
 }
 
 .promo-column {
   display: grid;
   gap: 16px;
+  max-height: 760px;
+  overflow: hidden;
+}
+
+.promo-column .card {
+  max-height: 520px;
+  overflow: hidden;
+}
+
+.promo-column.is-primary .card {
+  max-height: 600px;
+}
+
+.promo-column.is-primary .promo-label {
+  color: var(--text-strong);
 }
 
 .promo-label {
@@ -71,56 +86,9 @@
   border: 1px solid var(--border-strong);
   padding: 20px;
   background: var(--section-bg);
-  min-height: 620px;
-  display: grid;
-  align-content: start;
-  gap: 16px;
-}
-
-.pdf-sheet {
-  border-radius: var(--radius-md);
-  border: 1px dashed var(--border-dashed);
-  background: var(--card);
   min-height: 520px;
-  padding: 24px;
   display: grid;
-  gap: 18px;
-  color: var(--muted);
-}
-
-.pdf-sheet-header {
-  height: 28px;
-  width: 60%;
-  border-radius: 999px;
-  background: var(--field-bg);
-}
-
-.pdf-sheet-line {
-  height: 10px;
-  border-radius: 999px;
-  background: var(--field-bg);
-}
-
-.pdf-sheet-line.short {
-  width: 72%;
-}
-
-.pdf-sheet-line.medium {
-  width: 88%;
-}
-
-.pdf-sheet-total {
-  margin-top: auto;
-  height: 18px;
-  width: 45%;
-  border-radius: 999px;
-  background: var(--field-bg);
-}
-
-.pdf-note {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.95rem;
+  place-items: center;
 }
 
 @media (max-width: 1200px) {

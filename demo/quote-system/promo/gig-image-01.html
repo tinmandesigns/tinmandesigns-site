@@ -21,14 +21,12 @@
           <section class="card input-card" aria-labelledby="quote-details">
             <div class="card-header">
               <h2 id="quote-details">Quote details</h2>
-              <p>Adjust quantities, rates, and extras to generate a precise estimate.</p>
             </div>
 
             <div class="form-sections">
               <section class="form-section">
                 <div class="section-header">
                   <h3>Core pricing</h3>
-                  <p class="muted">Define the base service and standard fees.</p>
                 </div>
                 <div class="form-grid">
                   <label class="field">
@@ -75,41 +73,6 @@
                   </label>
                 </div>
               </section>
-
-              <section class="form-section">
-                <div class="section-header">
-                  <h3>Adjustments</h3>
-                  <p class="muted">Apply discounts, tax, and additional charges.</p>
-                </div>
-                <div class="form-grid">
-                  <label class="field">
-                    <span>Discount (%)</span>
-                    <input type="number" id="discountRate" min="0" max="100" step="1" value="8" />
-                  </label>
-
-                  <label class="field field-toggle">
-                    <span>Include tax</span>
-                    <div class="toggle-row">
-                      <input type="checkbox" id="includeTax" checked />
-                      <span>Apply VAT / sales tax to the discounted subtotal.</span>
-                    </div>
-                  </label>
-
-                  <label class="field" id="taxRateField">
-                    <span>Tax rate (%)</span>
-                    <input type="number" id="taxRate" min="0" max="100" step="1" value="12" />
-                  </label>
-
-                  <label class="field">
-                    <span>Custom additional fee</span>
-                    <div class="input-prefix">
-                      <span class="currency-symbol" data-currency-symbol>$</span>
-                      <input type="number" id="customFee" min="0" step="10" value="120" />
-                    </div>
-                    <small class="helper">Use for travel, materials, or one-off charges.</small>
-                  </label>
-                </div>
-              </section>
             </div>
 
             <div class="divider"></div>
@@ -117,7 +80,6 @@
             <div class="extras">
               <div>
                 <h3>Optional extras</h3>
-                <p class="muted">Select additional services that apply to this quote.</p>
               </div>
               <div class="extra-list">
                 <label class="extra-item">
@@ -130,11 +92,6 @@
                   <span>Executive reporting</span>
                   <span class="extra-amount">$95</span>
                 </label>
-                <label class="extra-item">
-                  <input type="checkbox" data-label="On-site visit" data-amount="320" />
-                  <span>On-site visit</span>
-                  <span class="extra-amount">$320</span>
-                </label>
               </div>
             </div>
           </section>
@@ -142,7 +99,6 @@
           <aside class="card summary-card" aria-live="polite">
             <div class="card-header">
               <h2>Price breakdown</h2>
-              <p>Review the line items before sharing the quote.</p>
             </div>
 
             <div class="breakdown">
@@ -174,30 +130,17 @@
               <div class="total">
                 <span>Total estimate</span>
                 <strong id="totalValue">$2,935</strong>
-                <p class="summary-note" id="summaryNote">
-                  Strategy consulting · Based on 16 hours at $145 each.
-                </p>
               </div>
-            </div>
-
-            <div class="callout">
-              <h3>Next steps</h3>
-              <ul>
-                <li>Review scope and timelines with your client.</li>
-                <li>Confirm any optional extras that are selected.</li>
-                <li>Send the estimate as part of your proposal.</li>
-              </ul>
             </div>
           </aside>
         </div>
       </div>
 
-      <div class="promo-column">
+      <div class="promo-column is-primary">
         <span class="promo-label">Client message</span>
         <section class="card message-card" aria-labelledby="client-message">
           <div class="card-header">
             <h2 id="client-message">Client-ready quote message</h2>
-            <p>Generate a professional message you can copy, share, or download.</p>
           </div>
 
           <div class="message-grid">
@@ -217,7 +160,6 @@
               <span>Message preview</span>
               <textarea id="quoteMessage" rows="8" readonly></textarea>
             </label>
-            <p class="muted helper">This message is ready to share or paste into your preferred app.</p>
           </div>
 
           <div class="action-panel">
@@ -227,10 +169,6 @@
             <span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span>
           </div>
 
-          <div class="reset-panel">
-            <button class="btn btn-tertiary" type="button" id="resetQuote">Start new quote</button>
-            <span class="helper">Clears the inputs and message without changing your theme.</span>
-          </div>
         </section>
       </div>
 
@@ -239,19 +177,8 @@
         <section class="card pdf-card" aria-labelledby="pdf-estimate">
           <div class="card-header">
             <h2 id="pdf-estimate">Estimate PDF</h2>
-            <p>Reserved space for a finished document preview.</p>
           </div>
           <div class="pdf-frame">
-            <div class="pdf-sheet" aria-hidden="true">
-              <div class="pdf-sheet-header"></div>
-              <div class="pdf-sheet-line medium"></div>
-              <div class="pdf-sheet-line"></div>
-              <div class="pdf-sheet-line short"></div>
-              <div class="pdf-sheet-line"></div>
-              <div class="pdf-sheet-line medium"></div>
-              <div class="pdf-sheet-total"></div>
-            </div>
-            <p class="pdf-note">Drop the exported PDF capture here in post.</p>
           </div>
         </section>
       </div>
