@@ -10,16 +10,17 @@
 <body>
   <div class="promo-page">
     <header class="promo-header">
-      <h1>Professional quotes, ready to send</h1>
-      <p>Pricing → client-ready message → estimate output</p>
+      <h1>Instant quotes that look ready to sign.</h1>
+      <p>Inputs → client-ready message → polished estimate output</p>
     </header>
 
     <section class="promo-columns">
       <div class="promo-column">
-        <span class="promo-label">Calculate</span>
+        <span class="promo-label">Inputs</span>
         <section class="card input-card" aria-labelledby="quote-details">
           <div class="card-header">
             <h2 id="quote-details">Quote details</h2>
+            <p>Capture the essentials to generate a clean, accurate total.</p>
           </div>
 
           <div class="form-sections">
@@ -27,19 +28,19 @@
               <div class="form-grid">
                 <label class="field">
                   <span>Service name</span>
-                  <input type="text" id="serviceName" value="Strategy consulting" />
+                  <input type="text" id="serviceName" value="Design strategy sprint" />
                 </label>
 
                 <label class="field">
                   <span id="quantityLabel">Hours</span>
-                  <input type="number" id="quantity" min="1" step="1" value="16" />
+                  <input type="number" id="quantity" min="1" step="1" value="18" />
                 </label>
 
                 <label class="field">
                   <span id="rateLabel">Rate per hour</span>
                   <div class="input-prefix">
                     <span class="currency-symbol" data-currency-symbol>$</span>
-                    <input type="number" id="rate" min="0" step="5" value="145" />
+                    <input type="number" id="rate" min="0" step="5" value="165" />
                   </div>
                 </label>
               </div>
@@ -49,6 +50,7 @@
           <div class="extras">
             <div>
               <h3>Optional extras</h3>
+              <p class="muted">Show add-ons that lift the final total.</p>
             </div>
             <div class="extra-list">
               <label class="extra-item">
@@ -57,9 +59,9 @@
                 <span class="extra-amount">$180</span>
               </label>
               <label class="extra-item">
-                <input type="checkbox" data-label="Executive reporting" data-amount="95" checked />
-                <span>Executive reporting</span>
-                <span class="extra-amount">$95</span>
+                <input type="checkbox" data-label="Brand playbook" data-amount="140" checked />
+                <span>Brand playbook</span>
+                <span class="extra-amount">$140</span>
               </label>
             </div>
           </div>
@@ -68,7 +70,7 @@
 
           <div class="total">
             <span>Total estimate</span>
-            <strong id="totalValue">$2,595</strong>
+            <strong id="totalValue">$3,290</strong>
           </div>
 
           <div class="is-hidden">
@@ -99,11 +101,11 @@
 
             <div class="breakdown-row">
               <span class="label">Base service</span>
-              <span class="value" id="baseLabel">16 × $145</span>
+              <span class="value" id="baseLabel">18 × $165</span>
             </div>
             <div class="breakdown-row">
               <span class="label">Base subtotal</span>
-              <span class="value" id="baseSubtotal">$2,320</span>
+              <span class="value" id="baseSubtotal">$2,970</span>
             </div>
             <div class="breakdown-row">
               <span class="label" id="setupFeeLabel">Setup fee</span>
@@ -115,6 +117,10 @@
               <div class="breakdown-row">
                 <span class="label">Priority turnaround</span>
                 <span class="value">$180</span>
+              </div>
+              <div class="breakdown-row">
+                <span class="label">Brand playbook</span>
+                <span class="value">$140</span>
               </div>
             </div>
 
@@ -128,17 +134,18 @@
         <section class="card message-card" aria-labelledby="client-message">
           <div class="card-header">
             <h2 id="client-message">Client-ready quote message</h2>
+            <p>Generate a clear summary your client can approve on the spot.</p>
           </div>
 
           <div class="message-grid">
             <label class="field">
               <span>Client name</span>
-              <input type="text" id="clientName" value="Taylor" />
+              <input type="text" id="clientName" value="Jordan Lee" />
             </label>
 
             <label class="field">
               <span>Short notes</span>
-              <textarea id="messageNote" rows="3">Estimate valid for 14 days.</textarea>
+              <textarea id="messageNote" rows="3">Includes kickoff workshop + summary deck. Valid for 14 days.</textarea>
             </label>
           </div>
 
@@ -151,8 +158,8 @@
 
           <div class="action-panel">
             <button class="btn btn-secondary" type="button" id="copyMessage">Copy message</button>
-            <button class="btn btn-share" type="button" id="shareMessage">Share</button>
             <button class="btn btn-pdf" type="button" id="downloadQuote">Download PDF</button>
+            <button class="btn btn-share" type="button" id="shareMessage">Share</button>
             <span class="copy-status is-hidden" id="copyStatus" role="status" aria-live="polite"></span>
           </div>
 
@@ -164,8 +171,13 @@
         <section class="card pdf-card" aria-labelledby="pdf-estimate">
           <div class="card-header">
             <h2 id="pdf-estimate">Estimate PDF</h2>
+            <p>Drop your branded PDF output in this space.</p>
           </div>
           <div class="pdf-frame">
+            <div class="pdf-placeholder">
+              <span class="pdf-title">Your PDF preview</span>
+              <span class="pdf-subtitle">Overlay the final client quote here.</span>
+            </div>
           </div>
         </section>
       </div>
