@@ -26,24 +26,20 @@
 
 .promo-columns {
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr) minmax(0, 0.9fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 48px;
+  align-items: stretch;
 }
 
 .promo-column {
   display: grid;
+  grid-template-rows: auto 1fr;
   gap: 16px;
-  max-height: 760px;
-  overflow: hidden;
+  height: 720px;
 }
 
 .promo-column .card {
-  max-height: 520px;
-  overflow: hidden;
-}
-
-.promo-column.is-primary .card {
-  max-height: 600px;
+  height: 100%;
 }
 
 .promo-column.is-primary .promo-label {
@@ -65,38 +61,44 @@
 
 .promo-page .message-card {
   margin-top: 0;
+  display: grid;
+  grid-template-rows: auto auto 1fr auto;
 }
 
 .promo-page .summary-card {
   position: static;
 }
 
-.promo-page .action-panel {
-  flex-wrap: wrap;
-  gap: 12px;
+.promo-page .form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .pdf-card {
   display: grid;
   gap: 20px;
+  height: 100%;
 }
 
 .pdf-frame {
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-strong);
-  padding: 20px;
+  padding: 32px;
   background: var(--section-bg);
-  min-height: 520px;
   display: grid;
   place-items: center;
+  height: 100%;
 }
 
-@media (max-width: 1200px) {
-  .promo-page {
-    padding: 48px 28px 64px;
-  }
+.promo-page .message-card .action-panel {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
 
-  .promo-columns {
-    grid-template-columns: 1fr;
-  }
+.promo-page .message-card .action-panel .btn {
+  width: 100%;
+}
+
+.promo-page .message-card .action-panel .btn-pdf {
+  grid-column: 1 / -1;
 }
