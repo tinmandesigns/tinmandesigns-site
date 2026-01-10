@@ -17,123 +17,110 @@
     <section class="promo-columns">
       <div class="promo-column">
         <span class="promo-label">Calculate</span>
-        <div class="promo-stack">
-          <section class="card input-card" aria-labelledby="quote-details">
-            <div class="card-header">
-              <h2 id="quote-details">Quote details</h2>
-            </div>
+        <section class="card input-card" aria-labelledby="quote-details">
+          <div class="card-header">
+            <h2 id="quote-details">Quote details</h2>
+          </div>
 
-            <div class="form-sections">
-              <section class="form-section">
-                <div class="section-header">
-                  <h3>Core pricing</h3>
-                </div>
-                <div class="form-grid">
-                  <label class="field">
-                    <span>Service name</span>
-                    <input type="text" id="serviceName" value="Strategy consulting" />
-                  </label>
-
-                  <label class="field">
-                    <span>Currency</span>
-                    <select id="currency">
-                      <option value="GBP">GBP (£)</option>
-                      <option value="USD" selected>USD ($)</option>
-                      <option value="EUR">EUR (€)</option>
-                    </select>
-                  </label>
-
-                  <label class="field">
-                    <span>Type</span>
-                    <select id="unitType">
-                      <option value="units">Units</option>
-                      <option value="hours" selected>Hours</option>
-                    </select>
-                  </label>
-
-                  <label class="field">
-                    <span id="quantityLabel">Hours</span>
-                    <input type="number" id="quantity" min="1" step="1" value="16" />
-                  </label>
-
-                  <label class="field">
-                    <span id="rateLabel">Rate per hour</span>
-                    <div class="input-prefix">
-                      <span class="currency-symbol" data-currency-symbol>$</span>
-                      <input type="number" id="rate" min="0" step="5" value="145" />
-                    </div>
-                  </label>
-
-                  <label class="field">
-                    <span>One-time setup fee</span>
-                    <div class="input-prefix">
-                      <span class="currency-symbol" data-currency-symbol>$</span>
-                      <input type="number" id="setupFee" min="0" step="10" value="300" />
-                    </div>
-                  </label>
-                </div>
-              </section>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="extras">
-              <div>
-                <h3>Optional extras</h3>
-              </div>
-              <div class="extra-list">
-                <label class="extra-item">
-                  <input type="checkbox" data-label="Priority turnaround" data-amount="180" checked />
-                  <span>Priority turnaround</span>
-                  <span class="extra-amount">$180</span>
+          <div class="form-sections">
+            <section class="form-section">
+              <div class="form-grid">
+                <label class="field">
+                  <span>Service name</span>
+                  <input type="text" id="serviceName" value="Strategy consulting" />
                 </label>
-                <label class="extra-item">
-                  <input type="checkbox" data-label="Executive reporting" data-amount="95" checked />
-                  <span>Executive reporting</span>
-                  <span class="extra-amount">$95</span>
+
+                <label class="field">
+                  <span id="quantityLabel">Hours</span>
+                  <input type="number" id="quantity" min="1" step="1" value="16" />
+                </label>
+
+                <label class="field">
+                  <span id="rateLabel">Rate per hour</span>
+                  <div class="input-prefix">
+                    <span class="currency-symbol" data-currency-symbol>$</span>
+                    <input type="number" id="rate" min="0" step="5" value="145" />
+                  </div>
                 </label>
               </div>
+            </section>
+          </div>
+
+          <div class="extras">
+            <div>
+              <h3>Optional extras</h3>
             </div>
-          </section>
+            <div class="extra-list">
+              <label class="extra-item">
+                <input type="checkbox" data-label="Priority turnaround" data-amount="180" checked />
+                <span>Priority turnaround</span>
+                <span class="extra-amount">$180</span>
+              </label>
+              <label class="extra-item">
+                <input type="checkbox" data-label="Executive reporting" data-amount="95" checked />
+                <span>Executive reporting</span>
+                <span class="extra-amount">$95</span>
+              </label>
+            </div>
+          </div>
 
-          <aside class="card summary-card" aria-live="polite">
-            <div class="card-header">
-              <h2>Price breakdown</h2>
+          <div class="divider"></div>
+
+          <div class="total">
+            <span>Total estimate</span>
+            <strong id="totalValue">$2,595</strong>
+          </div>
+
+          <div class="is-hidden">
+            <label class="field">
+              <span>Currency</span>
+              <select id="currency">
+                <option value="GBP">GBP (£)</option>
+                <option value="USD" selected>USD ($)</option>
+                <option value="EUR">EUR (€)</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>Type</span>
+              <select id="unitType">
+                <option value="units">Units</option>
+                <option value="hours" selected>Hours</option>
+              </select>
+            </label>
+
+            <label class="field">
+              <span>One-time setup fee</span>
+              <div class="input-prefix">
+                <span class="currency-symbol" data-currency-symbol>$</span>
+                <input type="number" id="setupFee" min="0" step="10" value="0" />
+              </div>
+            </label>
+
+            <div class="breakdown-row">
+              <span class="label">Base service</span>
+              <span class="value" id="baseLabel">16 × $145</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label">Base subtotal</span>
+              <span class="value" id="baseSubtotal">$2,320</span>
+            </div>
+            <div class="breakdown-row">
+              <span class="label" id="setupFeeLabel">Setup fee</span>
+              <span class="value" id="setupFeeValue">$0</span>
             </div>
 
-            <div class="breakdown">
+            <div class="breakdown-group" id="extrasBreakdown">
+              <p class="group-title">Extras</p>
               <div class="breakdown-row">
-                <span class="label">Base service</span>
-                <span class="value" id="baseLabel">16 × $145</span>
-              </div>
-              <div class="breakdown-row">
-                <span class="label">Base subtotal</span>
-                <span class="value" id="baseSubtotal">$2,320</span>
-              </div>
-              <div class="breakdown-row">
-                <span class="label" id="setupFeeLabel">Setup fee</span>
-                <span class="value" id="setupFeeValue">$300</span>
-              </div>
-
-              <div class="breakdown-group" id="extrasBreakdown">
-                <p class="group-title">Extras</p>
-                <div class="breakdown-row">
-                  <span class="label">Priority turnaround</span>
-                  <span class="value">$180</span>
-                </div>
-              </div>
-
-              <div id="adjustmentsBreakdown"></div>
-
-              <div class="divider"></div>
-
-              <div class="total">
-                <span>Total estimate</span>
-                <strong id="totalValue">$2,935</strong>
+                <span class="label">Priority turnaround</span>
+                <span class="value">$180</span>
               </div>
             </div>
-          </aside>
-        </div>
+
+            <div id="adjustmentsBreakdown"></div>
+          </div>
+        </section>
       </div>
 
       <div class="promo-column is-primary">
@@ -145,12 +132,12 @@
 
           <div class="message-grid">
             <label class="field">
-              <span>Client name (optional)</span>
+              <span>Client name</span>
               <input type="text" id="clientName" value="Taylor" />
             </label>
 
             <label class="field">
-              <span>Short notes / message tweak (optional)</span>
+              <span>Short notes</span>
               <textarea id="messageNote" rows="3">Estimate valid for 14 days.</textarea>
             </label>
           </div>
@@ -158,7 +145,7 @@
           <div class="message-preview">
             <label class="field">
               <span>Message preview</span>
-              <textarea id="quoteMessage" rows="8" readonly></textarea>
+              <textarea id="quoteMessage" rows="5" readonly></textarea>
             </label>
           </div>
 
@@ -166,7 +153,7 @@
             <button class="btn btn-secondary" type="button" id="copyMessage">Copy message</button>
             <button class="btn btn-share" type="button" id="shareMessage">Share</button>
             <button class="btn btn-pdf" type="button" id="downloadQuote">Download PDF</button>
-            <span class="copy-status" id="copyStatus" role="status" aria-live="polite"></span>
+            <span class="copy-status is-hidden" id="copyStatus" role="status" aria-live="polite"></span>
           </div>
 
         </section>
