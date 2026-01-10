@@ -1,43 +1,41 @@
 .promo-page {
-  width: 5000px;
-  height: 2893px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 200px 220px;
+  padding: 56px 40px 80px;
   position: relative;
   z-index: 1;
-  box-sizing: border-box;
 }
 
 .promo-header {
   display: grid;
-  gap: 24px;
-  margin-bottom: 120px;
+  gap: 12px;
+  margin-bottom: 32px;
 }
 
 .promo-header h1 {
   margin: 0;
-  font-size: 4.5rem;
+  font-size: 2.4rem;
   color: var(--text-strong);
 }
 
 .promo-header p {
   margin: 0;
   color: var(--muted);
-  font-size: 1.9rem;
+  font-size: 1.05rem;
 }
 
 .promo-columns {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 140px;
+  gap: 48px;
   align-items: stretch;
 }
 
 .promo-column {
   display: grid;
   grid-template-rows: auto 1fr;
-  gap: 32px;
-  height: 2000px;
+  gap: 16px;
+  height: 720px;
 }
 
 .promo-column .card {
@@ -49,7 +47,7 @@
 }
 
 .promo-label {
-  font-size: 1.3rem;
+  font-size: 0.85rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
@@ -75,28 +73,6 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.promo-page .card {
-  padding: 48px;
-}
-
-.promo-page .card-header h2 {
-  font-size: 2.2rem;
-}
-
-.promo-page .card-header p {
-  font-size: 1.25rem;
-}
-
-.promo-page .field span {
-  font-size: 1.05rem;
-}
-
-.promo-page .field input,
-.promo-page .field textarea,
-.promo-page .field select {
-  font-size: 1.1rem;
-}
-
 .pdf-card {
   display: grid;
   gap: 20px;
@@ -106,32 +82,11 @@
 .pdf-frame {
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-strong);
-  padding: 48px;
+  padding: 32px;
   background: var(--section-bg);
   display: grid;
   place-items: center;
   height: 100%;
-}
-
-.pdf-placeholder {
-  display: grid;
-  gap: 12px;
-  text-align: center;
-  padding: 32px;
-  border-radius: var(--radius-md);
-  border: 1px dashed var(--border-subtle);
-  background: rgba(255, 255, 255, 0.02);
-}
-
-.pdf-placeholder .pdf-title {
-  font-size: 1.5rem;
-  color: var(--text-strong);
-  font-weight: 600;
-}
-
-.pdf-placeholder .pdf-subtitle {
-  font-size: 1.05rem;
-  color: var(--muted);
 }
 
 .promo-page .message-card .action-panel {
