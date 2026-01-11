@@ -46,9 +46,9 @@ img {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(245, 246, 248, 0.9);
-  backdrop-filter: blur(12px);
+  background: #ffffff;
   border-bottom: 1px solid var(--border);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
 }
 
 .nav {
@@ -78,6 +78,7 @@ img {
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 30;
   transform: translateX(100%);
   opacity: 0;
   pointer-events: none;
