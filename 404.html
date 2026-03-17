@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Page Not Found | Tin Man Designs</title>
+    <meta
+      name="description"
+      content="The page you are looking for has moved or no longer exists. Return to Tin Man Designs to explore premium bespoke web design."
+    />
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Page Not Found | Tin Man Designs" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://tinmandesigns.com/404" />
+    <meta property="og:image" content="https://tinmandesigns.com/assets/images/logo-header.png" />
+    <meta name="robots" content="noindex, follow" />
+
+    <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+    <link rel="apple-touch-icon" href="assets/icons/icon-192x192.png" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@400;600;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --bg-color: #f8fafc;
+        --bg-panel: #e2e8f0;
+        --text-main: #0f172a;
+        --text-muted: #475569;
+        --metal-light: #f1f5f9;
+        --metal-trim: #cbd5e1;
+        --metal-dark: #64748b;
+        --metal-forged: #1e293b;
+        --font-display: "Outfit", sans-serif;
+        --font-body: "Inter", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: var(--font-body);
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .logo-img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 2rem;
+      }
+
+      h1 {
+        font-family: var(--font-display);
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        letter-spacing: -0.02em;
+        color: var(--metal-forged);
+      }
+
+      p {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        max-width: 400px;
+        line-height: 1.6;
+        margin-bottom: 2.5rem;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        background: var(--metal-forged);
+        color: white;
+        text-decoration: none;
+        padding: 0.85rem 1.8rem;
+        border-radius: 8px;
+        font-family: var(--font-display);
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        transition: transform 0.2s, background 0.3s;
+      }
+
+      .btn:hover {
+        background: var(--text-main);
+        transform: translateY(-2px);
+      }
+    </style>
+  </head>
+  <body>
+    <img
+      src="assets/images/logo.svg"
+      alt="Tin Man Designs Logo"
+      class="logo-img"
+    />
+    <h1>Lost Your Way?</h1>
+    <p>
+      It seems the page you are looking for has moved or no longer exists. Let's get you back to the workshop.
+    </p>
+    <a href="/" class="btn">Return Home</a>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+# Editor directories and files
+.vscode
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+.DS_Store
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Dependencies
+node_modules/
+
+# Build outputs (if any are added later)
+dist/
+build/
+.next/
+out/
+
+# Internal documentation and checklists
+AGENTS.md
+seo-checklist.txt
