@@ -125,7 +125,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@400;600;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Inter:wght@300;400;500&family=Outfit:wght@400;600;800&display=swap"
       rel="stylesheet"
     />
 
@@ -152,6 +152,7 @@
 
         --font-display: "Outfit", sans-serif;
         --font-body: "Inter", sans-serif;
+        --font-signature: "Alex Brush", cursive;
       }
 
       html {
@@ -493,6 +494,39 @@
           20px 20px 0 var(--metal-light),
           20px 20px 0 2px var(--metal-trim);
         object-fit: cover;
+      }
+
+      .hero-signature {
+        position: absolute;
+        bottom: -20px;
+        right: -20px;
+        font-family: var(--font-signature);
+        font-size: 4rem;
+        color: var(--metal-forged);
+        transform: rotate(-8deg);
+        z-index: 10;
+        opacity: 0;
+        clip-path: inset(0 100% 0 0);
+        filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.15));
+      }
+
+      .hero-visual.is-visible .hero-signature {
+        animation: writeSignature 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        animation-delay: 2.8s;
+      }
+
+      @keyframes writeSignature {
+        0% {
+          opacity: 0;
+          clip-path: inset(0 100% 0 0);
+        }
+        5% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 1;
+          clip-path: inset(0 0 0 0);
+        }
       }
 
       /* Machined corner accents */
@@ -1246,6 +1280,7 @@
             <div class="screw s-tr"></div>
             <div class="screw s-bl"></div>
             <div class="screw s-br"></div>
+            <div class="hero-signature">James</div>
           </div>
         </div>
       </section>
