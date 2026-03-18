@@ -498,34 +498,39 @@
 
       .hero-signature {
         position: absolute;
-        bottom: -20px;
-        right: -20px;
-        font-family: var(--font-signature);
-        font-size: 4rem;
-        color: var(--metal-forged);
+        bottom: -30px;
+        right: -30px;
         transform: rotate(-8deg);
         z-index: 10;
-        opacity: 0;
-        clip-path: inset(0 100% 0 0);
         filter: drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.15));
       }
 
-      .hero-visual.is-visible .hero-signature {
-        animation: writeSignature 2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-        animation-delay: 2.8s;
+      .sig-text {
+        font-family: var(--font-signature);
+        font-size: 4.5rem;
+        fill: transparent;
+        stroke: var(--metal-forged);
+        stroke-width: 1px;
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
       }
 
-      @keyframes writeSignature {
-        0% {
-          opacity: 0;
-          clip-path: inset(0 100% 0 0);
-        }
-        5% {
-          opacity: 1;
-        }
+      .hero-visual.is-visible .sig-text {
+        /* Draw the outline, then fade in the solid fill */
+        animation: 
+          drawSignature 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards,
+          fillSignature 0.5s ease-in forwards;
+        animation-delay: 2.8s, 4s; /* Start draw at 2.8s, fill at 4.0s */
+      }
+
+      @keyframes drawSignature {
+        100% { stroke-dashoffset: 0; }
+      }
+
+      @keyframes fillSignature {
         100% {
-          opacity: 1;
-          clip-path: inset(0 0 0 0);
+          fill: var(--metal-forged);
+          stroke-width: 0;
         }
       }
 
@@ -1280,7 +1285,11 @@
             <div class="screw s-tr"></div>
             <div class="screw s-bl"></div>
             <div class="screw s-br"></div>
-            <div class="hero-signature">James</div>
+            <div class="hero-signature">
+              <svg viewBox="0 0 160 80" width="160" height="80">
+                <text x="5" y="60" class="sig-text">James</text>
+              </svg>
+            </div>
           </div>
         </div>
       </section>
