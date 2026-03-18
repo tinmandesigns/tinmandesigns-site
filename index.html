@@ -164,8 +164,9 @@
       * {
         -webkit-tap-highlight-color: transparent;
       }
-      
-      a:focus, button:focus {
+
+      a:focus,
+      button:focus {
         outline: none;
       }
 
@@ -3388,7 +3389,8 @@
             };
 
             // Phone Animation Observer
-            const vpRatio = window.innerHeight > 700 ? 0.6 : 0.3;
+            // We want it closer to full view before triggering. Let's wait until it's comfortably on-screen.
+            const vpRatio = Math.min(0.85, window.innerHeight > 800 ? 0.85 : 0.5);
 
             const pwaObserver = new IntersectionObserver(
               (entries) => {
@@ -3400,7 +3402,7 @@
               },
               {
                 threshold: vpRatio,
-                rootMargin: "0px",
+                rootMargin: "-10% 0px -10% 0px", // Adds buffer so user has to scroll it further into view
               },
             );
             pwaObserver.observe(pwaContainer);
