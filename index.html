@@ -158,11 +158,13 @@
       html {
         scroll-behavior: smooth;
         scroll-padding-top: 120px;
+        overflow-x: clip;
       }
 
       body {
         margin: 0;
         padding: 0;
+        overflow-x: clip;
         background-color: var(--bg-color);
         color: var(--text-main);
         font-family: var(--font-body);
@@ -219,6 +221,18 @@
         letter-spacing: 0.05em;
         text-transform: uppercase;
         color: var(--metal-forged);
+      }
+
+      @media (max-width: 480px) {
+        header {
+          padding: calc(0.5rem + 1px) 4% 0.5rem;
+        }
+        .logo-img {
+          height: 45px;
+        }
+        .logo-text {
+          font-size: 1rem;
+        }
       }
 
       .nav-links {
@@ -405,10 +419,19 @@
       .hero-actions {
         display: flex;
         gap: 1rem;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
+        width: 100%;
       }
       .hero-actions > a {
         opacity: 0;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        white-space: normal;
       }
       .hero-actions > a:nth-child(1).is-visible {
         animation: textDriftUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) 0.7s forwards;
@@ -603,7 +626,7 @@
       /* Crafted Metal Cards */
       .engineered-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        grid-template-columns: repeat(3, 1fr);
         gap: 2.5rem;
       }
       .metal-card {
@@ -793,6 +816,11 @@
           grid-template-columns: 1fr;
           gap: 3rem;
         }
+        .comp-grid > *,
+        .engineered-grid > *,
+        .footer-grid > * {
+          min-width: 0;
+        }
         .hero-content h1 {
           font-size: 2.8rem;
         }
@@ -815,6 +843,8 @@
           display: flex;
           align-items: center;
           justify-content: center;
+          line-height: 1.2;
+          white-space: normal;
         }
         #pwa-text-container {
           order: -1;
@@ -1998,7 +2028,7 @@
           style="padding: 2rem 5%; scroll-margin-top: 60px"
         >
           <div class="comp-content">
-            <h2 style="font-size: 2.8rem">Step Up From Templates.</h2>
+            <h2 style="font-size: clamp(2rem, 5vw, 2.8rem)">Step Up From Templates.</h2>
             <p
               style="
                 font-size: 1.05rem;
@@ -2164,6 +2194,32 @@
               /* High impact score pop */
               .score-pop {
                 transform: scale(1.15) translateX(5px);
+              }
+
+              @media (max-width: 600px) {
+                #telemetry-container {
+                  padding: 1.5rem !important;
+                }
+                .telemetry-row {
+                  gap: 1rem;
+                }
+                .dial-svg {
+                  width: 80px;
+                }
+                .data-score {
+                  font-size: 2.8rem;
+                }
+                .data-label {
+                  font-size: 0.85rem;
+                }
+                .tinman-glow-backdrop {
+                  width: 70px;
+                  height: 70px;
+                }
+                .console-box {
+                  font-size: 0.65rem;
+                  padding: 0.6rem 0.8rem;
+                }
               }
 
               /* Standard Animation */
