@@ -233,6 +233,12 @@
         .logo-text {
           font-size: 1rem;
         }
+        .comp-table th,
+        .comp-table td {
+          padding: 0.6rem 0.3rem !important;
+          font-size: 0.75rem !important;
+          word-wrap: break-word;
+        }
       }
 
       .nav-links {
@@ -850,13 +856,14 @@
           order: -1;
         }
         .comp-table {
-          display: block;
-          overflow-x: auto;
-          white-space: nowrap;
+          display: table;
+          width: 100%;
+          border-collapse: collapse;
         }
         .comp-table th,
         .comp-table td {
-          padding: 1rem;
+          padding: 0.8rem 0.5rem;
+          font-size: 0.9rem;
         }
       }
 
