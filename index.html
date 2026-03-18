@@ -27,14 +27,20 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://tinmandesigns.com/" />
     <meta property="og:site_name" content="Tin Man Designs" />
-    <meta property="og:image" content="https://tinmandesigns.com/assets/images/logo-header.png" />
+    <meta
+      property="og:image"
+      content="https://tinmandesigns.com/assets/images/logo-header.png"
+    />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Tin Man Designs | Bespoke Web Design" />
     <meta
       name="twitter:description"
       content="Lightning-fast bespoke websites and PWAs crafted by an independent developer in Pembrokeshire."
     />
-    <meta name="twitter:image" content="https://tinmandesigns.com/assets/images/logo-header.png" />
+    <meta
+      name="twitter:image"
+      content="https://tinmandesigns.com/assets/images/logo-header.png"
+    />
 
     <!-- Canonical Tag -->
     <link rel="canonical" href="https://tinmandesigns.com/" />
@@ -153,6 +159,14 @@
         --font-display: "Outfit", sans-serif;
         --font-body: "Inter", sans-serif;
         --font-signature: "Alex Brush", cursive;
+      }
+
+      * {
+        -webkit-tap-highlight-color: transparent;
+      }
+      
+      a:focus, button:focus {
+        outline: none;
       }
 
       html {
@@ -372,7 +386,8 @@
       }
 
       /* Hero */
-      .hero { padding-top: 2rem; 
+      .hero {
+        padding-top: 2rem;
         position: relative;
         z-index: 1;
         min-height: 80vh;
@@ -554,14 +569,16 @@
 
       .hero-visual.is-visible .sig-text {
         /* Draw the outline, then fade in the solid fill */
-        animation: 
+        animation:
           drawSignature 1.8s cubic-bezier(0.4, 0, 0.2, 1) forwards,
           fillSignature 0.5s ease-in forwards;
         animation-delay: 2.8s, 4s; /* Start draw at 2.8s, fill at 4.0s */
       }
 
       @keyframes drawSignature {
-        100% { stroke-dashoffset: 0; }
+        100% {
+          stroke-dashoffset: 0;
+        }
       }
 
       @keyframes fillSignature {
@@ -928,14 +945,16 @@
         height: 44px;
         position: relative;
         cursor: pointer;
-        box-shadow: inset 0 1px 2px #fff, 0 2px 5px rgba(0,0,0,0.1);
+        box-shadow:
+          inset 0 1px 2px #fff,
+          0 2px 5px rgba(0, 0, 0, 0.1);
         z-index: 1100;
         padding: 0;
         box-sizing: border-box;
         outline: none;
       }
       .mobile-toggle:active {
-        box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
         transform: translateY(1px);
       }
       .toggle-bolt {
@@ -945,16 +964,37 @@
         background: var(--metal-trim);
         border: 1px solid var(--metal-dark);
         border-radius: 50%;
-        box-shadow: inset -1px -1px 1px rgba(0,0,0,0.3), inset 1px 1px 1px #fff;
+        box-shadow:
+          inset -1px -1px 1px rgba(0, 0, 0, 0.3),
+          inset 1px 1px 1px #fff;
         transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
       .toggle-bolt::after {
-        content: ""; position: absolute; top: 40%; left: 10%; right: 10%; height: 1px; background: rgba(0,0,0,0.4); transform: rotate(45deg);
+        content: "";
+        position: absolute;
+        top: 40%;
+        left: 10%;
+        right: 10%;
+        height: 1px;
+        background: rgba(0, 0, 0, 0.4);
+        transform: rotate(45deg);
       }
-      .toggle-bolt.tl { top: 4px; left: 4px; }
-      .toggle-bolt.tr { top: 4px; right: 4px; }
-      .toggle-bolt.bl { bottom: 4px; left: 4px; }
-      .toggle-bolt.br { bottom: 4px; right: 4px; }
+      .toggle-bolt.tl {
+        top: 4px;
+        left: 4px;
+      }
+      .toggle-bolt.tr {
+        top: 4px;
+        right: 4px;
+      }
+      .toggle-bolt.bl {
+        bottom: 4px;
+        left: 4px;
+      }
+      .toggle-bolt.br {
+        bottom: 4px;
+        right: 4px;
+      }
 
       /* Spin bolts on open */
       .menu-open .mobile-toggle .toggle-bolt {
@@ -973,9 +1013,15 @@
         border-radius: 2px;
         transition: all 0.4s ease;
       }
-      .mobile-toggle .line-1 { top: 14px; }
-      .mobile-toggle .line-2 { top: 21px; }
-      .mobile-toggle .line-3 { top: 28px; }
+      .mobile-toggle .line-1 {
+        top: 14px;
+      }
+      .mobile-toggle .line-2 {
+        top: 21px;
+      }
+      .mobile-toggle .line-3 {
+        top: 28px;
+      }
 
       /* Transform to X */
       .menu-open .mobile-toggle .line-1 {
@@ -1000,7 +1046,7 @@
         height: 100vh;
         background: var(--bg-panel);
         border-left: 2px solid var(--metal-dark);
-        box-shadow: -10px 0 30px rgba(0,0,0,0.8);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.8);
         z-index: 1050;
         display: flex;
         flex-direction: column;
@@ -1016,7 +1062,9 @@
       .mobile-nav-panel .panel-grid-lines {
         position: absolute;
         inset: 0;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
+        background-image:
+          linear-gradient(rgba(0, 0, 0, 0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(0, 0, 0, 0.03) 1px, transparent 1px);
         background-size: 20px 20px;
         pointer-events: none;
         z-index: 0;
@@ -1042,9 +1090,12 @@
         border-bottom: 1px solid var(--metal-trim);
         opacity: 0;
         transform: translateX(30px);
-        transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), color 0.3s;
+        transition:
+          opacity 0.4s ease,
+          transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1),
+          color 0.3s;
       }
-      
+
       .mobile-nav-links a.mob-link:hover {
         color: var(--metal-dark);
       }
@@ -1055,11 +1106,21 @@
       }
 
       /* Staggered entrance for links */
-      .menu-open .mobile-nav-links a.mob-link:nth-child(1) { transition-delay: 0.3s; }
-      .menu-open .mobile-nav-links a.mob-link:nth-child(2) { transition-delay: 0.4s; }
-      .menu-open .mobile-nav-links a.mob-link:nth-child(3) { transition-delay: 0.5s; }
-      .menu-open .mobile-nav-links a.mob-link:nth-child(4) { transition-delay: 0.6s; }
-      .menu-open .mobile-nav-links a.mob-link:nth-child(5) { transition-delay: 0.7s; }
+      .menu-open .mobile-nav-links a.mob-link:nth-child(1) {
+        transition-delay: 0.3s;
+      }
+      .menu-open .mobile-nav-links a.mob-link:nth-child(2) {
+        transition-delay: 0.4s;
+      }
+      .menu-open .mobile-nav-links a.mob-link:nth-child(3) {
+        transition-delay: 0.5s;
+      }
+      .menu-open .mobile-nav-links a.mob-link:nth-child(4) {
+        transition-delay: 0.6s;
+      }
+      .menu-open .mobile-nav-links a.mob-link:nth-child(5) {
+        transition-delay: 0.7s;
+      }
 
       .menu-open .mobile-nav-links .btn {
         opacity: 0;
@@ -1067,7 +1128,10 @@
         animation: mobBtnFade 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards 0.8s;
       }
       @keyframes mobBtnFade {
-        to { opacity: 1; transform: translateX(0); }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
       }
 
       /* Dark Overlay */
@@ -1111,14 +1175,18 @@
         border: 1px solid var(--metal-trim);
         border-radius: 4px;
         margin-bottom: 1rem;
-        box-shadow: inset 0 1px 0 #ffffff, 0 2px 5px rgba(0,0,0,0.05);
+        box-shadow:
+          inset 0 1px 0 #ffffff,
+          0 2px 5px rgba(0, 0, 0, 0.05);
         overflow: hidden;
         transition: all 0.3s ease;
         position: relative;
       }
       .faq-item.active {
         border-color: #10b981;
-        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.1), inset 0 1px 0 rgba(255,255,255,0.5);
+        box-shadow:
+          0 5px 15px rgba(16, 185, 129, 0.1),
+          inset 0 1px 0 rgba(255, 255, 255, 0.5);
       }
       .faq-question {
         padding: 1.5rem 2rem;
@@ -1137,7 +1205,10 @@
       .faq-question::before {
         content: "";
         position: absolute;
-        top: 0; left: 0; bottom: 0; width: 4px;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 4px;
         background: transparent;
         transition: background 0.3s;
       }
@@ -1152,22 +1223,34 @@
         background: var(--bg-panel);
         border-radius: 50%;
         border: 1px solid var(--metal-trim);
-        box-shadow: inset 1px 1px 2px #fff, inset -1px -1px 2px rgba(0,0,0,0.1);
+        box-shadow:
+          inset 1px 1px 2px #fff,
+          inset -1px -1px 2px rgba(0, 0, 0, 0.1);
       }
-      .faq-icon::before, .faq-icon::after {
+      .faq-icon::before,
+      .faq-icon::after {
         content: "";
         position: absolute;
         background: var(--metal-dark);
-        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s;
+        transition:
+          transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          background 0.3s;
         border-radius: 1px;
       }
       .faq-icon::before {
-        top: 10px; left: 5px; right: 5px; height: 2px;
+        top: 10px;
+        left: 5px;
+        right: 5px;
+        height: 2px;
       }
       .faq-icon::after {
-        top: 5px; bottom: 5px; left: 10px; width: 2px;
+        top: 5px;
+        bottom: 5px;
+        left: 10px;
+        width: 2px;
       }
-      .faq-item.active .faq-icon::before, .faq-item.active .faq-icon::after {
+      .faq-item.active .faq-icon::before,
+      .faq-item.active .faq-icon::after {
         background: #10b981;
       }
       .faq-item.active .faq-icon::after {
@@ -1189,11 +1272,18 @@
         color: var(--text-muted);
         line-height: 1.6;
         border-top: 1px dashed transparent;
-        transition: border-color 0.4s, padding-top 0.4s;
+        transition:
+          border-color 0.4s,
+          padding-top 0.4s;
       }
       .faq-item.active .faq-answer-inner {
         padding-top: 1.5rem;
-        border-color: rgba(255, 255, 255, 0.1); /* Optional, adds a subtle separator */
+        border-color: rgba(
+          255,
+          255,
+          255,
+          0.1
+        ); /* Optional, adds a subtle separator */
       }
       .sheen-link {
         color: #10b981;
@@ -1229,9 +1319,15 @@
         animation: sheenEffect 6s infinite;
       }
       @keyframes sheenEffect {
-        0% { left: -100%; }
-        25% { left: 200%; }
-        100% { left: 200%; }
+        0% {
+          left: -100%;
+        }
+        25% {
+          left: 200%;
+        }
+        100% {
+          left: 200%;
+        }
       }
     </style>
   </head>
@@ -1263,7 +1359,11 @@
       </nav>
 
       <!-- Machined Mobile Toggle -->
-      <button class="mobile-toggle" aria-label="Toggle menu" id="mobile-menu-btn">
+      <button
+        class="mobile-toggle"
+        aria-label="Toggle menu"
+        id="mobile-menu-btn"
+      >
         <div class="toggle-bolt tl"></div>
         <div class="toggle-bolt tr"></div>
         <div class="toggle-bolt bl"></div>
@@ -1278,12 +1378,12 @@
     <div class="mobile-overlay" id="mobile-overlay"></div>
     <div class="mobile-nav-panel" id="mobile-nav-panel">
       <!-- Decorative bolts for the panel -->
-      <div class="screw s-tl" style="top: 15px; left: 15px;"></div>
-      <div class="screw s-tr" style="top: 15px; right: 15px;"></div>
-      <div class="screw s-bl" style="bottom: 15px; left: 15px;"></div>
-      <div class="screw s-br" style="bottom: 15px; right: 15px;"></div>
+      <div class="screw s-tl" style="top: 15px; left: 15px"></div>
+      <div class="screw s-tr" style="top: 15px; right: 15px"></div>
+      <div class="screw s-bl" style="bottom: 15px; left: 15px"></div>
+      <div class="screw s-br" style="bottom: 15px; right: 15px"></div>
       <div class="panel-grid-lines"></div>
-      
+
       <nav class="mobile-nav-links">
         <a href="#philosophy" class="mob-link">My Approach</a>
         <a href="#advantage" class="mob-link">Benefits</a>
@@ -1291,7 +1391,18 @@
         <a href="#pwa" class="mob-link">App Experience</a>
         <a href="#services" class="mob-link">Pricing</a>
         <a href="#faq" class="mob-link">FAQ</a>
-        <a href="#contact" class="btn btn-primary mob-link-btn" style="margin-top: 1rem; width: 100%; box-sizing: border-box; font-size: 1.1rem; padding: 1.2rem 1rem;">Get Started</a>
+        <a
+          href="#contact"
+          class="btn btn-primary mob-link-btn"
+          style="
+            margin-top: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 1.1rem;
+            padding: 1.2rem 1rem;
+          "
+          >Get Started</a
+        >
       </nav>
     </div>
 
@@ -1331,7 +1442,12 @@
             <div class="screw s-bl"></div>
             <div class="screw s-br"></div>
             <div class="hero-signature">
-              <svg viewBox="0 0 120 60" width="120" height="60" style="overflow: visible;">
+              <svg
+                viewBox="0 0 120 60"
+                width="120"
+                height="60"
+                style="overflow: visible"
+              >
                 <text x="5" y="45" class="sig-text">James</text>
               </svg>
             </div>
@@ -2035,7 +2151,9 @@
           style="padding: 2rem 5%; scroll-margin-top: 60px"
         >
           <div class="comp-content">
-            <h2 style="font-size: clamp(2rem, 5vw, 2.8rem)">Step Up From Templates.</h2>
+            <h2 style="font-size: clamp(2rem, 5vw, 2.8rem)">
+              Step Up From Templates.
+            </h2>
             <p
               style="
                 font-size: 1.05rem;
@@ -3006,7 +3124,9 @@
               .pwa-text-element {
                 opacity: 0;
                 transform: translateY(30px);
-                transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+                transition:
+                  opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1),
+                  transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
               }
               .pwa-text-element.is-visible {
                 opacity: 1;
@@ -3082,7 +3202,9 @@
                 position: relative;
                 opacity: 0;
                 transform: translateX(20px);
-                transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+                transition:
+                  opacity 0.8s ease,
+                  transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
               }
               .pwa-feature-item.is-visible {
                 opacity: 1;
@@ -3095,7 +3217,8 @@
                 z-index: 2;
               }
               .pwa-feature-item.is-visible .pwa-bolt {
-                animation: boltSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+                animation: boltSlideUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)
+                  forwards;
               }
               @keyframes boltSlideUp {
                 0% {
@@ -3114,10 +3237,13 @@
                 }
               }
             </style>
-            
-            <div id="pwa-features-list" style="display: flex; flex-direction: column; gap: 1.25rem">
-              <div class="pwa-feature-item" style="transition-delay: 0.7s;">
-                <div class="screw pwa-bolt" style="animation-delay: 0.8s;"></div>
+
+            <div
+              id="pwa-features-list"
+              style="display: flex; flex-direction: column; gap: 1.25rem"
+            >
+              <div class="pwa-feature-item" style="transition-delay: 0.7s">
+                <div class="screw pwa-bolt" style="animation-delay: 0.8s"></div>
                 <div>
                   <strong
                     style="
@@ -3144,8 +3270,8 @@
                 </div>
               </div>
 
-              <div class="pwa-feature-item" style="transition-delay: 0.9s;">
-                <div class="screw pwa-bolt" style="animation-delay: 1.0s;"></div>
+              <div class="pwa-feature-item" style="transition-delay: 0.9s">
+                <div class="screw pwa-bolt" style="animation-delay: 1s"></div>
                 <div>
                   <strong
                     style="
@@ -3172,8 +3298,8 @@
                 </div>
               </div>
 
-              <div class="pwa-feature-item" style="transition-delay: 1.1s;">
-                <div class="screw pwa-bolt" style="animation-delay: 1.2s;"></div>
+              <div class="pwa-feature-item" style="transition-delay: 1.1s">
+                <div class="screw pwa-bolt" style="animation-delay: 1.2s"></div>
                 <div>
                   <strong
                     style="
@@ -3274,7 +3400,7 @@
               },
               {
                 threshold: vpRatio,
-                rootMargin: "0px"
+                rootMargin: "0px",
               },
             );
             pwaObserver.observe(pwaContainer);
@@ -3282,24 +3408,28 @@
             // Text Elements Observer (Animates on Scroll)
             const textObserver = new IntersectionObserver(
               (entries, observer) => {
-                entries.forEach(entry => {
+                entries.forEach((entry) => {
                   if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
+                    entry.target.classList.add("is-visible");
                     observer.unobserve(entry.target);
                   }
                 });
               },
               {
                 threshold: 0.1,
-                rootMargin: "0px 0px -50px 0px" // Trigger slightly before the very bottom of the screen
-              }
+                rootMargin: "0px 0px -50px 0px", // Trigger slightly before the very bottom of the screen
+              },
             );
 
-            const featureItems = document.querySelectorAll('#pwa-features-list .pwa-feature-item');
-            const textElements = document.querySelectorAll('#pwa-text-container .pwa-text-element');
-            
-            featureItems.forEach(item => textObserver.observe(item));
-            textElements.forEach(item => textObserver.observe(item));
+            const featureItems = document.querySelectorAll(
+              "#pwa-features-list .pwa-feature-item",
+            );
+            const textElements = document.querySelectorAll(
+              "#pwa-text-container .pwa-text-element",
+            );
+
+            featureItems.forEach((item) => textObserver.observe(item));
+            textElements.forEach((item) => textObserver.observe(item));
 
             // Allow elegant replay
             pwaContainer.addEventListener("click", () => {
@@ -3340,7 +3470,10 @@
             color: var(--text-muted);
           "
         >
-          Also looking for ongoing zero-latency hosting &amp; maintenance? <a href="#growth-partner" class="sheen-link">Explore the Growth Partner Retainer &darr;</a>
+          Also looking for ongoing zero-latency hosting &amp; maintenance?
+          <a href="#growth-partner" class="sheen-link"
+            >Explore the Growth Partner Retainer &darr;</a
+          >
         </p>
 
         <div class="engineered-grid">
@@ -4011,7 +4144,10 @@
       <section id="faq" class="faq-section">
         <div class="faq-header">
           <h2>Client Briefing</h2>
-          <p>Common questions from tradespeople and small businesses before we start building.</p>
+          <p>
+            Common questions from tradespeople and small businesses before we
+            start building.
+          </p>
         </div>
 
         <div class="faq-accordion">
@@ -4024,7 +4160,11 @@
             <div class="faq-answer-wrapper">
               <div class="faq-answer">
                 <div class="faq-answer-inner">
-                  You do. Once the final invoice is settled, the custom code, the assets, and the entire digital property belong to your business 100%. If you ever decide to move away from my hosting, I will hand over all your files without hesitation or hidden exit fees.
+                  You do. Once the final invoice is settled, the custom code,
+                  the assets, and the entire digital property belong to your
+                  business 100%. If you ever decide to move away from my
+                  hosting, I will hand over all your files without hesitation or
+                  hidden exit fees.
                 </div>
               </div>
             </div>
@@ -4039,7 +4179,11 @@
             <div class="faq-answer-wrapper">
               <div class="faq-answer">
                 <div class="faq-answer-inner">
-                  I handle the heavy lifting. I'll ask you a few targeted questions about your services, your ideal clients, and your background. From there, I write professional, SEO-optimized copy designed to convert visitors into leads. You will, of course, have full approval before we launch.
+                  I handle the heavy lifting. I'll ask you a few targeted
+                  questions about your services, your ideal clients, and your
+                  background. From there, I write professional, SEO-optimized
+                  copy designed to convert visitors into leads. You will, of
+                  course, have full approval before we launch.
                 </div>
               </div>
             </div>
@@ -4054,7 +4198,11 @@
             <div class="faq-answer-wrapper">
               <div class="faq-answer">
                 <div class="faq-answer-inner">
-                  Because I don't use slow drag-and-drop builders, my workflow is incredibly streamlined. A standard "Professional" package typically goes from initial handshake to live launch in about 2 to 3 weeks, assuming we have all the necessary photos and approvals.
+                  Because I don't use slow drag-and-drop builders, my workflow
+                  is incredibly streamlined. A standard "Professional" package
+                  typically goes from initial handshake to live launch in about
+                  2 to 3 weeks, assuming we have all the necessary photos and
+                  approvals.
                 </div>
               </div>
             </div>
@@ -4069,7 +4217,11 @@
             <div class="faq-answer-wrapper">
               <div class="faq-answer">
                 <div class="faq-answer-inner">
-                  Since your site is a hand-coded, static Progressive Web App hosted on an enterprise network, it is virtually impossible to "break" or be hacked. However, if you are on the Growth Partner retainer, I monitor the site 24/7. If anything ever looks out of place, I fix it immediately.
+                  Since your site is a hand-coded, static Progressive Web App
+                  hosted on an enterprise network, it is virtually impossible to
+                  "break" or be hacked. However, if you are on the Growth
+                  Partner retainer, I monitor the site 24/7. If anything ever
+                  looks out of place, I fix it immediately.
                 </div>
               </div>
             </div>
@@ -4084,7 +4236,13 @@
             <div class="faq-answer-wrapper">
               <div class="faq-answer">
                 <div class="faq-answer-inner">
-                  To keep things simple and transparent, I operate on a standard 50/50 milestone basis. A 50% deposit secures your build slot in my schedule and covers the initial architecture. The final 50% is only invoiced once the site is completely built, approved by you, and ready to launch. Payments are made via standard bank transfer (BACS). For the optional monthly Growth Partner retainer, we set up a simple, automated Direct Debit.
+                  To keep things simple and transparent, I operate on a standard
+                  50/50 milestone basis. A 50% deposit secures your build slot
+                  in my schedule and covers the initial architecture. The final
+                  50% is only invoiced once the site is completely built,
+                  approved by you, and ready to launch. Payments are made via
+                  standard bank transfer (BACS). For the optional monthly Growth
+                  Partner retainer, we set up a simple, automated Direct Debit.
                 </div>
               </div>
             </div>
@@ -4108,11 +4266,11 @@
 
         <div class="contact-card">
           <!-- Corner Bolts -->
-          <div class="screw s-tl" style="opacity: 1;"></div>
-          <div class="screw s-tr" style="opacity: 1;"></div>
-          <div class="screw s-bl" style="opacity: 1;"></div>
-          <div class="screw s-br" style="opacity: 1;"></div>
-          
+          <div class="screw s-tl" style="opacity: 1"></div>
+          <div class="screw s-tr" style="opacity: 1"></div>
+          <div class="screw s-bl" style="opacity: 1"></div>
+          <div class="screw s-br" style="opacity: 1"></div>
+
           <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem">
             Initialize Build Request
           </h3>
@@ -4198,9 +4356,9 @@
       // Hero Section Scroll Observer
       document.addEventListener("DOMContentLoaded", () => {
         const heroElements = document.querySelectorAll(
-          ".hero .hero-visual, .hero-content h1, .hero-content p, .hero-actions > a"
+          ".hero .hero-visual, .hero-content h1, .hero-content p, .hero-actions > a",
         );
-        
+
         const heroObserver = new IntersectionObserver(
           (entries, observer) => {
             entries.forEach((entry) => {
@@ -4210,7 +4368,7 @@
               }
             });
           },
-          { threshold: 0.1 }
+          { threshold: 0.1 },
         );
 
         heroElements.forEach((el) => {
@@ -4225,7 +4383,7 @@
 
         const toggleMenu = () => {
           body.classList.toggle("menu-open");
-          
+
           // Prevent background scrolling when open
           if (body.classList.contains("menu-open")) {
             body.style.overflow = "hidden";
@@ -4242,7 +4400,7 @@
         }
 
         // Close menu when a link is clicked
-        mobLinks.forEach(link => {
+        mobLinks.forEach((link) => {
           link.addEventListener("click", () => {
             if (body.classList.contains("menu-open")) {
               toggleMenu();
@@ -4256,7 +4414,7 @@
           const question = item.querySelector(".faq-question");
           question.addEventListener("click", () => {
             const isActive = item.classList.contains("active");
-            
+
             // Close all other items
             faqItems.forEach((otherItem) => {
               otherItem.classList.remove("active");
