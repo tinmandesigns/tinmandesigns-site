@@ -3076,7 +3076,8 @@
               }
 
               @keyframes replayPulse {
-                0%, 100% {
+                0%,
+                100% {
                   opacity: 0.7;
                   background: rgba(0, 0, 0, 0.5);
                   border-color: rgba(255, 255, 255, 0.2);
@@ -3091,8 +3092,9 @@
               }
 
               .phone-floating .replay-hint {
-                animation: 
-                  replayAttentionFlash 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 1.5s both,
+                animation:
+                  replayAttentionFlash 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 1.5s
+                    both,
                   replayPulse 3s ease-in-out 3s infinite;
               }
               #pwa-phone-container.phone-floating:hover .replay-hint {
@@ -4369,7 +4371,7 @@
               <textarea
                 id="cf-message"
                 class="form-control"
-                placeholder="Tell me about the mechanics of your project..."
+                placeholder="Tell me a bit about your project and what you're looking to build..."
                 required
               ></textarea>
             </div>
