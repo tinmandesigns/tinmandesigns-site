@@ -132,6 +132,7 @@ Imagine this scenario. A couple opens your website on their iPhone. Because of t
         </div>
       </div>
     </div>
+
   </div>
   <figcaption>PWA offline architecture guarantees your portfolio is cached native-style for zero-latency browsing anywhere.</figcaption>
 </figure>

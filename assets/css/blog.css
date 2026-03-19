@@ -451,7 +451,9 @@
   justify-content: flex-end;
   width: 65px;
 }
-.anim-offline .status-wifi { animation: toggleWifi 10s infinite; }
+.anim-offline .status-wifi {
+  animation: toggleWifi 10s infinite;
+}
 .anim-offline .status-offline {
   position: absolute;
   right: 0;
@@ -537,39 +539,112 @@
 
 /* Offline Narrative Keyframes */
 @keyframes toggleWifi {
-  0%, 15% { opacity: 1; }
-  18%, 92% { opacity: 0; }
-  95%, 100% { opacity: 1; }
+  0%,
+  15% {
+    opacity: 1;
+  }
+  18%,
+  92% {
+    opacity: 0;
+  }
+  95%,
+  100% {
+    opacity: 1;
+  }
 }
 @keyframes toggleOffline {
-  0%, 15% { opacity: 0; }
-  18%, 92% { opacity: 1; }
-  95%, 100% { opacity: 0; }
+  0%,
+  15% {
+    opacity: 0;
+  }
+  18%,
+  92% {
+    opacity: 1;
+  }
+  95%,
+  100% {
+    opacity: 0;
+  }
 }
 @keyframes tapApp {
-  0%, 22% { transform: scale(1); filter: brightness(1); }
-  25% { transform: scale(0.85); filter: brightness(0.8); }
-  28%, 100% { transform: scale(1); filter: brightness(1); }
+  0%,
+  22% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
+  25% {
+    transform: scale(0.85);
+    filter: brightness(0.8);
+  }
+  28%,
+  100% {
+    transform: scale(1);
+    filter: brightness(1);
+  }
 }
 @keyframes launchApp {
-  0%, 28% { transform: scale(0); opacity: 0; border-radius: 40px; }
-  32%, 85% { transform: scale(1); opacity: 1; border-radius: 0; }
-  90%, 100% { transform: scale(0); opacity: 0; border-radius: 40px; }
+  0%,
+  28% {
+    transform: scale(0);
+    opacity: 0;
+    border-radius: 40px;
+  }
+  32%,
+  85% {
+    transform: scale(1);
+    opacity: 1;
+    border-radius: 0;
+  }
+  90%,
+  100% {
+    transform: scale(0);
+    opacity: 0;
+    border-radius: 40px;
+  }
 }
 @keyframes slideBanner {
-  0%, 35% { transform: translateY(-30px); opacity: 0; }
-  38%, 85% { transform: translateY(0); opacity: 1; }
-  88%, 100% { transform: translateY(-30px); opacity: 0; }
+  0%,
+  35% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  38%,
+  85% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  88%,
+  100% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
 }
 @keyframes scrollUpDelayed {
-  0%, 45% { transform: translateY(0); }
-  85% { transform: translateY(-160px); }
-  86%, 100% { transform: translateY(0); }
+  0%,
+  45% {
+    transform: translateY(0);
+  }
+  85% {
+    transform: translateY(-160px);
+  }
+  86%,
+  100% {
+    transform: translateY(0);
+  }
 }
 @keyframes statusColor {
-  0%, 28% { color: #fff; }
-  32%, 85% { color: var(--text-main, #111418); }
-  90%, 100% { color: #fff; }
+  0%,
+  28% {
+    color: #fff;
+  }
+  32%,
+  85% {
+    color: var(--text-main, #111418);
+  }
+  90%,
+  100% {
+    color: #fff;
+  }
 }
 
 /* Keyframes */
