@@ -435,9 +435,73 @@
   animation: showFast 10s infinite cubic-bezier(0.1, 0.9, 0.2, 1);
 }
 
-/* 3. Offline Animation (Unchanged purely offline logic) */
-.anim-offline .device-content {
+/* 3. Offline Animation (App Launch Narrative) */
+.anim-offline {
   position: relative;
+  background: #111418;
+}
+.anim-offline .device-status-bar {
+  position: relative;
+  z-index: 10;
+  color: #fff;
+}
+.anim-offline .network-group {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  width: 65px;
+}
+.anim-offline .status-wifi { animation: toggleWifi 10s infinite; }
+.anim-offline .status-offline {
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  animation: toggleOffline 10s infinite;
+}
+
+.anim-offline .home-screen {
+  position: absolute;
+  inset: 0;
+  padding: 50px 15px 15px;
+  z-index: 2;
+}
+.anim-offline .app-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.anim-offline .dummy-app {
+  aspect-ratio: 1;
+  background: #2f3640;
+  border-radius: 10px;
+}
+.anim-offline .portfolio-app {
+  aspect-ratio: 1;
+  background: #ff4757;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 7px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(255, 71, 87, 0.4);
+  animation: tapApp 10s infinite;
+}
+
+.anim-offline .app-window {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-color);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0);
+  opacity: 0;
+  border-radius: 60px;
+  transform-origin: 38% 30%;
+  animation: launchApp 10s infinite;
   overflow: hidden;
 }
 .anim-offline .offline-banner {
@@ -449,16 +513,58 @@
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
+  margin-top: 25px;
+  transform: translateY(-30px);
+  animation: slideBanner 10s infinite;
 }
-.anim-offline .infinite-scroll {
+.anim-offline .device-content {
+  flex: 1;
+  overflow: hidden;
+  padding: 15px;
+}
+.anim-offline .offline-scroll {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  animation: scrollUp 4s linear infinite;
-  margin-top: 20px;
+  animation: scrollUpDelayed 10s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
 }
 .anim-offline .speed-photo {
+  height: 90px;
   background: linear-gradient(135deg, #1e272e, #485460);
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* Offline Narrative Keyframes */
+@keyframes toggleWifi {
+  0%, 15% { opacity: 1; }
+  18%, 92% { opacity: 0; }
+  95%, 100% { opacity: 1; }
+}
+@keyframes toggleOffline {
+  0%, 15% { opacity: 0; }
+  18%, 92% { opacity: 1; }
+  95%, 100% { opacity: 0; }
+}
+@keyframes tapApp {
+  0%, 22% { transform: scale(1); filter: brightness(1); }
+  25% { transform: scale(0.85); filter: brightness(0.8); }
+  28%, 100% { transform: scale(1); filter: brightness(1); }
+}
+@keyframes launchApp {
+  0%, 28% { transform: scale(0); opacity: 0; border-radius: 40px; }
+  32%, 85% { transform: scale(1); opacity: 1; border-radius: 0; }
+  90%, 100% { transform: scale(0); opacity: 0; border-radius: 40px; }
+}
+@keyframes slideBanner {
+  0%, 35% { transform: translateY(-30px); opacity: 0; }
+  38%, 85% { transform: translateY(0); opacity: 1; }
+  88%, 100% { transform: translateY(-30px); opacity: 0; }
+}
+@keyframes scrollUpDelayed {
+  0%, 45% { transform: translateY(0); }
+  85% { transform: translateY(-160px); }
+  86%, 100% { transform: translateY(0); }
 }
 
 /* Keyframes */

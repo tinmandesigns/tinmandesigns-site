@@ -103,16 +103,33 @@ Imagine this scenario. A couple opens your website on their iPhone. Because of t
 <figure class="blog-image">
   <div class="device-simulator anim-offline">
     <div class="device-notch"></div>
-    <div class="device-status-bar"><span>10:30</span><span>&#x2708;&#xFE0F; Offline</span></div>
-    <div class="offline-banner">Securely Cached</div>
-    <div class="device-content">
-      <div class="infinite-scroll">
-        <div class="speed-photo"></div>
-        <div class="speed-photo"></div>
-        <div class="speed-photo"></div>
-        <div class="speed-photo"></div>
-        <div class="speed-photo"></div>
-        <div class="speed-photo"></div>
+    <div class="device-status-bar">
+      <span>10:30</span>
+      <span class="network-group">
+        <span class="status-wifi">&#x1F4F6; 5G</span>
+        <span class="status-offline">&#x2708;&#xFE0F; Offline</span>
+      </span>
+    </div>
+    
+    <div class="home-screen">
+      <div class="app-grid">
+        <div class="dummy-app"></div><div class="dummy-app"></div><div class="dummy-app"></div><div class="dummy-app"></div>
+        <div class="dummy-app"></div><div class="portfolio-app">Portfolio</div><div class="dummy-app"></div><div class="dummy-app"></div>
+        <div class="dummy-app"></div><div class="dummy-app"></div><div class="dummy-app"></div><div class="dummy-app"></div>
+      </div>
+    </div>
+
+    <div class="app-window">
+      <div class="offline-banner">Securely Cached</div>
+      <div class="device-content">
+        <div class="offline-scroll">
+          <div class="speed-photo"></div>
+          <div class="speed-photo"></div>
+          <div class="speed-photo"></div>
+          <div class="speed-photo"></div>
+          <div class="speed-photo"></div>
+          <div class="speed-photo"></div>
+        </div>
       </div>
     </div>
   </div>
