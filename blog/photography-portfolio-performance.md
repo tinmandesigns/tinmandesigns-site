@@ -103,7 +103,7 @@ Imagine this scenario. A couple opens your website on their iPhone. Because of t
 <figure class="blog-image">
   <div class="device-simulator anim-offline">
     <div class="device-notch"></div>
-    <div class="device-status-bar"><span>10:30</span><span>âœˆï¸ Offline</span></div>
+    <div class="device-status-bar"><span>10:30</span><span>&#x2708;&#xFE0F; Offline</span></div>
     <div class="offline-banner">Securely Cached</div>
     <div class="device-content">
       <div class="infinite-scroll">
