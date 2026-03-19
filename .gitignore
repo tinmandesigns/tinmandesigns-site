@@ -6,7 +6,6 @@
 *.njsproj
 *.sln
 *.sw?
-.DS_Store
 
 # OS generated files
 .DS_Store
@@ -19,12 +18,11 @@ Thumbs.db
 
 # Dependencies
 node_modules/
+# Keep package-lock.json for reproducible Edge deployments
+# package-lock.json
 
-# Build outputs (if any are added later)
-dist/
-build/
-.next/
-out/
+# Build outputs
+_site/
 
 # Internal documentation and checklists
 AGENTS.md

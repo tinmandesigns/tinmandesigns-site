@@ -1,0 +1,25 @@
+{
+  "name": "tinmandesigns-pwa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sw.js",
+  "scripts": {
+    "start": "eleventy --serve",
+    "build": "eleventy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tinmandesigns/tinmandesigns-site.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/tinmandesigns/tinmandesigns-site/issues"
+  },
+  "homepage": "https://github.com/tinmandesigns/tinmandesigns-site#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.1.5"
+  }
+}

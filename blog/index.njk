@@ -1,0 +1,43 @@
+﻿---
+layout: base.njk
+title: The Workbench
+eleventyExcludeFromCollections: true
+description: Thoughts on bespoke web design, hard-coded performance, and taking on the bloated templates.
+---
+
+<div class="blog-roll">
+  <h1>The Workbench</h1>
+  <p class="blog-summary" style="font-size: 1.25rem; margin-bottom: 3.5rem;">
+    Thoughts on bespoke web design, hard-coded performance, and why I build everything from scratch in Pembrokeshire.
+  </p>
+
+  <ul class="blog-list">
+  {%- for post in collections.blog | reverse -%}
+    <li class="blog-item article-preview">
+      {%- set preview_img = post.data.thumb_image | default(post.data.hero_image) -%}
+      {%- if preview_img -%}
+      <div class="article-preview-thumb">
+        <a href="{{ post.url }}">
+          <img src="{{ preview_img }}" alt="{{ post.data.image_alt | default('Thumbnail for ' ~ post.data.title) }}" style="object-fit: cover; width: 100%; height: 100%;" />
+        </a>
+      </div>
+      {%- endif -%}
+
+      <div class="article-preview-content">
+        <div class="blog-meta-row">
+          <span class="blog-author-highlight">BY JAMES</span>
+          <span>&bull;</span>
+          <span class="blog-date" style="margin: 0;">{{ post.date | dateReadable }}</span>
+          <span>&bull;</span>
+          <span class="blog-reading-time">{{ post.content | readingTime }}</span>
+        </div>
+        <h2 class="blog-title"><a href="{{ post.url }}">{{ post.data.title | default(post.fileSlug) }}</a></h2>
+        <p class="blog-summary">
+          {{ post.data.description | default("Read article &rarr;" | safe) }}
+        </p>
+      </div>
+    </li>
+  {%- endfor -%}
+  </ul>
+</div>
+

@@ -1,0 +1,39 @@
+# Tin Man Designs: Bespoke Blog Post Checklist
+
+This checklist acts as the definitive quality gate for all future blog posts. Every article must meet these exact standards to maintain the premium brand aesthetic, "sub-1s" performance, and strict Technical SEO requirements.
+
+## I. The Frontmatter (Metadata & SEO)
+Every Markdown file in the `/blog/` folder MUST contain this exact frontmatter block structure:
+[ ] `title`: Compelling, pain-point focused, and keyword-rich (50-60 chars).
+[ ] `description`: A hook-driven summary ending with a value proposition (150-160 chars).
+[ ] `date`: Formatted strictly as YYYY-MM-DD.
+[ ] `og_type`: Strictly set to "article".
+[ ] `author`: Strictly set to "James".
+[ ] `keywords`: Comma-separated list of highly targeted terms (e.g., bespoke web design, Pembrokeshire, custom PWA).
+[ ] `hero_image`: Relative path to a WebP image (e.g., `/assets/images/blog/your-hero.webp`).
+[ ] `thumb_image`: Relative path to a dedicated WebP thumbnail.
+[ ] `og_image`: Absolute path (e.g., `https://tinmandesigns.com/...`) pointing to the WebP hero image.
+[ ] `image_alt`: Highly descriptive, contextual text outlining the hero image.
+
+## II. Image Processing & Optimization (Zero-Latency Rule)
+All AI-generated or raw images MUST undergo an optimization pipeline before deployment.
+[ ] **Format Engine**: All images converted to `.webp`. No heavy `.png` or `.jpg` files allowed.
+[ ] **Hero Image Specs**: Intelligently cropped and exported at `1600x900` at 90 quality.
+[ ] **Thumbnail Specs**: A separate file exclusively generated for the Workbench list. Downsampled to `500x360` using the `lanczos3` kernel algorithm to prevent hover pixelation.
+[ ] **Editorial Presentation**: The main hero article image must remain static. No CSS hover animations applied to the main article image (protects the "no false click" premium UI experience).
+
+## III. Brand Voice & Content (The Craftsman's Tone)
+[ ] **Pronouns Check**: Exclusively use "I", "my", or "me". NEVER use "we" or "our" (Tin Man Designs is a solo craftsman).
+[ ] **Vocabulary Check**: Strict formatting requirement. NEVER use "—" (em-dash).
+[ ] **The Narrative Focus**: Content should always circle back to hard-coded performance, bloated builder pain points (WP/Wix), or bespoke craftsmanship parameters. 
+
+## IV. Technical & Structural Enhancements
+[ ] **The Authoritative Citation**: Include at least ONE outbound link to a highly authoritative, factual source (e.g., Think With Google, Core Web Vitals data) to boost E-E-A-T.
+[ ] **External Link Security**: All strict external links must use `target="_blank" rel="noopener noreferrer"`.
+[ ] **External Link Styling**: Custom inline styling applied to external text links to match the brand (e.g., `style="color: var(--text-main); font-weight: 600; text-decoration: underline; text-decoration-color: var(--metal-dark); text-underline-offset: 4px;"`).
+[ ] **The Lead Conversion (CTA)**: The bottom of the article MUST include a custom `.blog-cta` box, smoothly linking the prospect down to `#contact` or back to the homepage `/`.
+
+## V. Final Workflow Verification
+[ ] `npm run build` executed to ensure no circular dependency or rendering errors occur with new Eleventy collections.
+[ ] Verified that the JSON-LD `<script type="application/ld+json">` structured data populates correctly in the static export, specifically checking that the `dateISO` pipe outputs a valid ISO timestamp.
+[ ] View Workbench list view locally to ensure the new thumbnail scales without DOM shift/layout jumping.

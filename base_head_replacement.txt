@@ -1,0 +1,27 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Dynamic SEO Meta Tags -->
+    <title>{% if title %}{{ title }} | Tin Man Designs{% else %}Custom Web Design & Progressive Web Apps | Tin Man Designs Pembrokeshire{% endif %}</title>
+    <meta name="description" content="{% if description %}{{ description }}{% else %}I hand-code lightning-fast, premium bespoke websites and Progressive Web Apps (PWAs). Situated in Pembrokeshire, Wales, I partner with businesses globally to engineer high-performance digital experiences.{% endif %}" />
+    <meta name="keywords" content="{% if keywords %}{{ keywords }}{% else %}custom web design, progressive web apps, PWA developer, bespoke websites, web developer Pembrokeshire, web design Haverfordwest, freelance web designer, tradesman web design, small business websites Wales, local web developer{% endif %}" />
+
+    <!-- Open Graph / Social SEO -->
+    <meta property="og:title" content="{% if title %}{{ title }}{% else %}Custom Web Design & Progressive Web Apps | Tin Man Designs{% endif %}" />
+    <meta property="og:description" content="{% if description %}{{ description }}{% else %}Premium, bespoke websites and Progressive Web Apps built from scratch. Based in Pembrokeshire, partnering globally.{% endif %}" />
+    <meta property="og:type" content="{% if og_type %}{{ og_type }}{% else %}website{% endif %}" />
+    <meta property="og:url" content="https://tinmandesigns.com{{ page.url }}" />
+    <meta property="og:site_name" content="Tin Man Designs" />
+    <meta property="og:image" content="{% if og_image %}{{ og_image }}{% else %}https://tinmandesigns.com/assets/images/logo-header.png{% endif %}" />
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{% if title %}{{ title }}{% else %}Tin Man Designs | Bespoke Web Design{% endif %}" />
+    <meta name="twitter:description" content="{% if description %}{{ description }}{% else %}Lightning-fast bespoke websites and PWAs crafted by an independent developer in Pembrokeshire.{% endif %}" />
+    <meta name="twitter:image" content="{% if og_image %}{{ og_image }}{% else %}https://tinmandesigns.com/assets/images/logo-header.png{% endif %}" />
+
+    <!-- Canonical Tag -->
+    <link rel="canonical" href="https://tinmandesigns.com{{ page.url }}" />

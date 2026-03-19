@@ -1,0 +1,62 @@
+﻿---
+layout: base.njk
+---
+<!-- Structured Data (JSON-LD) for Blog SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://tinmandesigns.com{{ page.url }}"
+  },
+  "headline": "{{ title | escape }}",
+  "description": "{{ description | escape }}",
+  "image": "{% if og_image %}{{ og_image }}{% else %}https://tinmandesigns.com/assets/images/logo-header.png{% endif %}",
+  "author": {
+    "@type": "Person",
+    "name": "James",
+    "url": "https://tinmandesigns.com/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Tin Man Designs",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://tinmandesigns.com/assets/images/logo.svg"
+    }
+  },
+  "datePublished": "{{ page.date | dateIso }}",
+  "dateModified": "{{ page.date | dateIso }}"
+}
+</script>
+
+<article class="blog-content">
+  <div class="blog-meta-block">
+    <a href="/blog/" class="back-link" style="position: relative; z-index: 10;">&larr; Back to Workbench</a>
+    
+    <h1 style="margin-top: 1.5rem; margin-bottom: 1rem;">{{ title }}</h1>
+    
+    {% if description %}
+    <p style="font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2rem; border-bottom: 1px solid var(--metal-trim); padding-bottom: 2rem;">
+      {{ description }}
+    </p>
+    {% endif %}
+
+    <div class="blog-meta-row">
+      <span class="blog-author-highlight">BY JAMES</span>
+      <span>&bull;</span>
+      <span class="blog-date">{{ page.date | dateReadable }}</span>
+      <span>&bull;</span>
+      <span class="blog-reading-time">{{ content | readingTime }}</span>
+    </div>
+  </div>
+
+  {% if hero_image %}
+  <div class="blog-hero-container">
+    <img src="{{ hero_image }}" alt="{{ image_alt | default('Hero image for ' ~ title) }}" width="1600" height="900" loading="eager" decoding="async" />
+  </div>
+  {% endif %}
+
+  {{ content | safe }}
+</article>
