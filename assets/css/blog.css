@@ -443,7 +443,7 @@
 .anim-offline .device-status-bar {
   position: relative;
   z-index: 10;
-  color: #fff;
+  animation: statusColor 10s infinite;
 }
 .anim-offline .network-group {
   position: relative;
@@ -565,6 +565,11 @@
   0%, 45% { transform: translateY(0); }
   85% { transform: translateY(-160px); }
   86%, 100% { transform: translateY(0); }
+}
+@keyframes statusColor {
+  0%, 28% { color: #fff; }
+  32%, 85% { color: var(--text-main, #111418); }
+  90%, 100% { color: #fff; }
 }
 
 /* Keyframes */

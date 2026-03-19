@@ -1,4 +1,4 @@
-const CACHE_NAME = "tinman-cache-v6";
+const CACHE_NAME = "tinman-cache-v7";
 const urlsToCache = [
   "/",
   "/index.html",
