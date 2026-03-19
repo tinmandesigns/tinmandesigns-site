@@ -4409,6 +4409,16 @@
             .catch((err) =>
               console.log("ServiceWorker registration failed: ", err),
             );
+            
+          // Automatically reload the page when a new Service Worker takes over.
+          // This guarantees returning users instantly see UI updates without manual cache clearing.
+          let refreshing = false;
+          navigator.serviceWorker.addEventListener("controllerchange", () => {
+            if (!refreshing) {
+              refreshing = true;
+              window.location.reload();
+            }
+          });
         });
       }
 

@@ -1,4 +1,4 @@
-const CACHE_NAME = "tinman-cache-v7";
+const CACHE_NAME = "tinman-cache-v8";
 const urlsToCache = [
   "/",
   "/index.html",
@@ -11,7 +11,11 @@ self.addEventListener("install", (event) => {
   // Force active
   self.skipWaiting();
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache)),
+    caches.open(CACHE_NAME).then((cache) => {
+      // Bypass the browser HTTP cache when precaching files so we guarantee the newest versions
+      const requests = urlsToCache.map(url => new Request(url, { cache: "no-store" }));
+      return cache.addAll(requests);
+    }),
   );
 });
 
